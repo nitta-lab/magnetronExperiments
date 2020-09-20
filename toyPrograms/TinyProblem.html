@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<title>小課題のソースコード</title>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" href="sample.css">-->
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <link rel="stylesheet" href="../debugger-like/debugger.css" type="text/css" />
+    <!-- script type="text/javascript" src="../debugger-like/srcCode.js"></script -->
+    <script type="text/javascript">
+        function init(param) {
+            var path = "pre_Exp1";
+            var title = "小課題1のソースコード";
+            if (param) {
+                var p = getParam('path', param);
+                var t = getParam('title', param);
+                if (p) path = p;
+                if (t) title = t + "のソースコード";
+            }
+            document.title = title;
+            document.getElementById("title2").innerText = title;
+            var eSrcA = document.getElementById("srcCodeTextA");
+            eSrcA.setAttribute("src", path + "/A.html");
+            eSrcA.addEventListener('load', function () {
+                iframeResize(eSrcA);
+           // 　srcCodeFrameScroll();
+            }, {
+                once: true
+            });
+            var eSrcB = document.getElementById("srcCodeTextB");
+            eSrcB.setAttribute("src", path + "/B.html");
+            eSrcB.addEventListener('load', function () {
+                iframeResize(eSrcB);
+           // 　srcCodeFrameScroll();
+            }, {
+                once: true
+            });
+            var eSrcC = document.getElementById("srcCodeTextC");
+            eSrcC.setAttribute("src", path + "/C.html");
+            eSrcC.addEventListener('load', function () {
+                iframeResize(eSrcC);
+           // 　srcCodeFrameScroll();
+            }, {
+                once: true
+            });
+            var eSrcD = document.getElementById("srcCodeTextD");
+            eSrcD.setAttribute("src", path + "/D.html");
+            eSrcD.addEventListener('load', function () {
+                iframeResize(eSrcD);
+           // 　srcCodeFrameScroll();
+            }, {
+                once: true
+            });
+            var eSrcE = document.getElementById("srcCodeTextE");
+            eSrcE.setAttribute("src", path + "/E.html");
+            eSrcE.addEventListener('load', function () {
+                iframeResize(eSrcE);
+           // 　srcCodeFrameScroll();
+            }, {
+                once: true
+            });
+        }
+
+        function getParam(name, url) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        function iframeResize(element) {
+            var clientHeight = element.contentWindow.document.body.scrollHeight + 20;
+            var clientWidth = document.body.clientWidth;
+            element.style.height = clientHeight + 'px';
+            element.style.width = clientWidth + 'px';
+        }
+    </script>
+</head>
+
+<body onLoad="init(location.search)">
+<h2 id="title2">小課題(ソースコード)</h2>
+<p class="tab-title">
+    <img src="../images/jcu_obj.png" alt="jcu_obj">
+    A.java
+</p>
+<iframe class="tab-content" id="srcCodeTextA" src="pre_Exp1/A.html" style="height: 205px; width: 1056px;"></iframe>
+
+<p class="tab-title">
+    <img src="../images/jcu_obj.png" alt="jcu_obj">
+    B.java
+</p>
+<iframe class="tab-content" id="srcCodeTextB" src="pre_Exp1/B.html" style="height: 135px; width: 1056px;"></iframe>
+
+<p class="tab-title">
+    <img src="../images/jcu_obj.png" alt="jcu_obj">
+    C.java
+</p>
+<iframe class="tab-content" id="srcCodeTextC"  src="pre_Exp1/C.html" style="height: 70px; width: 1056px;"></iframe>
+
+<p class="tab-title">
+    <img src="../images/jcu_obj.png" alt="jcu_obj">
+    D.java
+</p>
+<iframe class="tab-content" id="srcCodeTextD"  src="pre_Exp1/D.html" style="height: 135px; width: 1056px;"></iframe>
+
+<p class="tab-title">
+    <img src="../images/jcu_obj.png" alt="jcu_obj">
+    E.java
+</p>
+<iframe class="tab-content" id="srcCodeTextE"  src="pre_Exp1/E.html" style="height: 135px; width: 1056px;"></iframe>
+
+<br>
+<a href="#" onClick="window.close();">閉じる</a>
+
+</body>

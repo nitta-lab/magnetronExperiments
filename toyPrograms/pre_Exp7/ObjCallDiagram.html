@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>小課題7のオブジェクト図と呼び出し木による表現</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+        function init(param) {
+            var title = "小課題7";
+            if (param) {
+                var t = getParam('title', param);
+                if (t) title = t;
+            }
+            document.title = title + "のオブジェクト図と呼び出し木による表現";
+            document.getElementById("title2").innerText = title + "のオブジェクト図と呼び出し木による表現";
+            var desc= document.getElementById("description");
+            desc.innerText = title + "の" + desc.innerText;
+        }
+
+        function getParam(name, url) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+</head>
+<body onLoad="init(location.search)">
+<h1 id="title2">小課題7のオブジェクト図と呼び出し木による表現</h1>
+
+<p id="description">オブジェクト図に呼び出し木を埋め込んだものです．<br>
+円はオブジェクトを，円の内部の矩形はメソッドの実行，破線の円はスーパークラス内の実装部分を表し，円の上にクラス名を，矩形の内部にメソッド名を記します．<br>
+円の間の実線矢印はフィールドによる参照，破線矢印はオブジェクトの生成を，矩形間の破線矢印はメソッド呼び出しを表します．<br>
+また，あるクラスのクラスメソッド(staticメソッド)が呼び出された場合，そのクラス自体は矩形で表されます．<br>
+</p>
+
+<img src="./Exp7ObjCall.jpg" alt="オブジェクト図と呼び出し木">
+<br>
+
+<a href="#" onClick="window.close();">閉じる</a>
+</body>
+</html>

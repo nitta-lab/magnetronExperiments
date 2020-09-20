@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="DefaultDragTracker">
+package org.jhotdraw.draw.tool; // l.11
+:
+public class DefaultDragTracker extends AbstractTool implements DragTracker { // l.46
+    :
+    private HashSet&lt;Figure&gt; transformedFigures; // l.80
+    :
+    @Override // l.95
+    public void mousePressed(MouseEvent evt) {
+        :
+        DrawingView view = getView();
+        :
+        if (...) { // l.112 (課題から外れるため一部省略)
+            :
+            transformedFigures = new HashSet&lt;Figure&gt;(); // l.115
+            for (Figure f : view.getSelectedFigures()) {
+                if (...) { // (課題から外れるため一部省略)
+                    transformedFigures.add(f);
+                    :
+                } // l.124
+            }
+            :
+        } // l.131
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent evt) {
+        :
+        if (!transformedFigures.isEmpty()) { // l.137
+            :
+            AffineTransform tx = ...; // l.153 (課題から外れるため一部省略)
+            :
+            for (Figure f : transformedFigures) { // l.157
+                :
+                f.transform(tx);
+                :
+            }
+            :
+        } // l.165
+    }
+    :
+} // l.220
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="DefaultDragTracker";
+        var lineNumPair = [
+            [1, 11],
+            [3, 46],
+            [5, 80],
+            [7, 95],
+            [12, 112],
+            [14,115],
+            [19,124],
+            [22, 131],
+            [30, 153],
+            [32, 157],
+            [38, 165],
+            [41, 220]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

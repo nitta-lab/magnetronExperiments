@@ -1,0 +1,52 @@
+{
+    "root": {
+        "html": "Main.html",
+        "signature": "public static void main(String[])",
+        "firstLine": "4",
+        "lastLine": "5",
+        "children": [
+            {
+                "callFrom": "4",
+                "callee": {
+                    "html": "A.html",
+                    "signature": "public void m()",
+                    "firstLine": "5",
+                    "lastLine": "6",
+                    "children": [
+                        {
+                            "callFrom": "5",
+                            "callee": {
+                                "html": "B.html",
+                                "signature": "public C getC()",
+                                "firstLine": "4",
+                                "lastLine": "4",
+                                "children": null
+                            }
+                        },
+                        {
+                            "callFrom": "5",
+                            "callee": {
+                                "html": "D.html",
+                                "signature": "public void passC(C)",
+                                "firstLine": "4",
+                                "lastLine": "5",
+                                "children": [
+                                    {
+                                        "callFrom": "4",
+                                        "callee": {
+                                            "html": "E.html",
+                                            "signature": "public void setC(C)",
+                                            "firstLine": "4",
+                                            "lastLine": "5",
+                                            "children": null
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

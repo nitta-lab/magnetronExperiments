@@ -1,0 +1,7 @@
+public class A {
+	B b = new B();
+	D d = new D();
+	void m() {
+		d.passC(b.getC());
+	}
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>小課題7のアニメーション</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+        function init(param) {
+            var title = "小課題7";
+            if (param) {
+                var t = getParam('title', param);
+                if (t) title = t;
+            }
+            document.title = title + "のアニメーション";
+            document.getElementById("title2").innerText = title + "のアニメーション";
+            var desc= document.getElementById("description");
+            desc.innerText = title + "の" + desc.innerText;
+        }
+
+        function getParam(name, url) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+</head>
+<body onLoad="init(location.search)">
+<h1 id="title2">小課題7のアニメーション</h1>
+
+<p id="description">プログラム実行時のオブジェクトの動きを，アニメーション化したものです．<br>
+円はオブジェクトを，円の内部の矩形はメソッドの実行を表し，円の内部にクラス名を，矩形の内部にメソッド名を記します．<br>
+円の間の実線矢印はフィールドによる参照，破線矢印はオブジェクトの生成を，矩形間の破線矢印はメソッド呼び出しを表します．<br>
+また，あるクラスのクラスメソッド(staticメソッド)が呼び出された場合，そのクラス自体は矩形で表されます．<br>
+メソッド内で仮引数や局所変数によって参照されているオブジェクトは，メソッド実行を表す矩形に接する形で配置され，引数や戻り値による受け渡しに応じて，オブジェクトが移動します．
+</p>
+<video src="./Exp7.mp4" alt="アニメーション" controls></video>
+<br>
+
+<a href="#" onClick="window.close();">閉じる</a>
+</body>
+</html>

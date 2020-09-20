@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<title>課題1</title>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" href="sample.css">-->
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript" src="../../debugger-like/lineNum.js"></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+
+    <script type="text/javascript">
+        function setLineNum() {
+            var id="ActionRemoveFromDiagram";
+            var lineNumPair = [[1, 39], [3, 60], [5, 82], [8, 85], [15, 92]];
+            changeLineNum(lineNumPair, id);
+        }
+    </script>
+</head>
+
+<body onLoad="setLineNum()">
+<h1>課題1</h1>
+
+<p>
+課題1では，ArgoUMLの削除機能について見ていきます．
+ArgoUMLでは，選択状態にある図形をDelキーを押して削除することができます．
+ここでは，削除機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
+図形が選択されている状態でDelキーを押すと，<code>ActionRemoveFromDiagram</code> クラスの <code>actionPerformed()</code> メソッド(以下，<code>ActionRemoveFromDiagram#actionPerformed()</code> のように書く)が呼び出されます．
+その中で，89行目から <code>f.removeFromDiagram()</code> が呼び出され，ローカル変数 <code>f</code> で参照されている選択図形が削除されます．
+ここで，<code>Fig</code> は図形を表すArgoUML(正確にはArgoUML内部で用いられているGEFフレームワーク)のクラスで，
+<code>f</code> からは <code>Fig</code> クラスの子孫クラスである <code>FigClass</code> クラスのインスタンスが参照されています．
+</p>
+
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<pre class="brush:java;" id="ActionRemoveFromDiagram">
+package org.argouml.uml.diagram.ui; //l.39
+:
+public class ActionRemoveFromDiagram extends AbstractAction { //l.60
+    :
+    public void actionPerformed(ActionEvent ae) { // l.82
+        Editor ce = Globals.curEditor();
+        :
+        List&lt;Fig&gt; figs = ce.getSelectionManager().getFigs(); // l.85
+        for (Fig f : figs) {
+            if (...) { // (課題から外れるため一部省略)
+                if (f instanceof GraphElement) {
+                    f.removeFromDiagram();
+                } else {
+                    :
+                } // l.92
+            }
+        }
+    }
+}
+</pre>
+</div>
+
+<p>
+下記のリンク先には，
+<blockquote>
+「選択された図形がArgoUMLのシステム内部でどのように管理され，削除機能の実行によってどのように取り出されて，削除されるか?」
+</blockquote>
+を理解するために抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています．まず，このソースコードを最初から最後まで追いかけて，ソースコードの全体の流れを把握してください．
+</p>
+
+<p><a href="../../debugger-like/debugger.html?key=1" target="_blank">ArgoUMLの削除機能で実行されるソースコード（一部）</a></p>
+
+<p>
+次に，下記のリンク先の2つの動画を視聴して下さい．これらは，上記ソースコードの流れを可視化ツールによってアニメーション化したもので，それぞれ，
+<ol>
+    <li><code>ActionRemoveFromDiagram</code> の86行目で，このオブジェクト(<code>this</code>)が，ローカル変数 <code>f</code> によって，<code>FigClass</code> クラスのインスタンスと関連付けられるまでの経緯，</li>
+    <li><code>SelectionManager</code> の363行目で，ローカル変数 <code>figs</code> で参照されている <code>Vector</code> クラスのインスタンスが，<code>Selection#getContent()</code> の戻り値である <code>FigClass</code> クラスのインスタンスと，<code>Vector#addElement()</code> の呼び出しによって関連付けられるまでの経緯</li>
+</ol>
+を表しています．
+それぞれの動画を視聴した後，動画の内容とソースコードの内容を見比べながら，以下のアンケートにお答えください．
+</p>
+
+<p><a href="ProblemA1-code1.html" target="_blank">1. ActionRemoveFromDiagramのインスタンスとFigClassのインスタンスの関連付けに関する可視化</a></p>
+<p><a href="ProblemA1-code1.html" target="_blank">2. VectorクラスのインスタンスとFigClassのインスタンスの関連付けに関する可視化</a></p>
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfxRdhSSwP26kSn6vgt0InA-fPwP8_-lom3Go27ZqnddgKBzQ/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+<p style="margin-bottom:2em;"></p>
+<a href="Description-jEdit-A.html">次へ</a>
+
+</body>

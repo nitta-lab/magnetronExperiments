@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>小課題4のクラス図とシーケンス図</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+        function init(param) {
+            var title = "小課題4";
+            if (param) {
+                var t = getParam('title', param);
+                if (t) title = t;
+            }
+            document.title = title + "のクラス図とシーケンス図";
+            document.getElementById("title2").innerText = title + "のクラス図とシーケンス図";
+            document.getElementById("classDiagram").innerText = title + "のクラス図";
+            document.getElementById("sequenceDiagram").innerText = title + "のシーケンス図";
+        }
+
+        function getParam(name, url) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+</head>
+<body onLoad="init(location.search)">
+<h1 id="title2">小課題4のクラス図とシーケンス図</h1>
+
+<p id="classDiagram">クラス図</p>
+<img src="./Exp4.cld.jpg" alt="クラス図">
+
+<p id="sequenceDiagram">シーケンス図</p>
+<img src="./Exp4.sqd.jpg" alt="シーケンス図">
+<br>
+
+<a href="#" onClick="window.close();">閉じる</a>
+</body>
+</html>
