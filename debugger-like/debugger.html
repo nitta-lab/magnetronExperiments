@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="globals.js"></script>
+</head>
+
+<frameset rows="35,*" onLoad="init(location.search)">
+    <frame src="toolBarFrame.html" name="toolBarFrame" scrolling="no">
+
+        <frameset cols="300,*">
+            <frame src="callStackFrame.html" name="callStackFrame">
+                <frame src="srcCodeFrame.html" name="srcCodeFrame">
+        </frameset>
+
+        <noframes>
+
+            <body>
+                <p>フレームの代替内容</p>
+            </body>
+        </noframes>
+</frameset>
+
+</html>

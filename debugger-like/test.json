@@ -1,0 +1,30 @@
+{
+	"root": {
+		"html": "A.html",
+		"signature": "public void A.m()",
+		"firstLine": "15",
+		"lastLine": "20",
+		"children":	[
+			{
+				"callFrom": "16",
+  				"callee": {
+	  				"html": "B.html",
+		  			"signature": "public C B.getC()",
+		  			"firstLine": "5",
+		  			"lastLine": "6",
+		  			"children": null
+		  		}
+			},
+			{
+				"callFrom": "18",
+  				"callee": {
+      					"html": "C.html",
+  	  			  	"signature": "public void C.setA(A)",
+    			  		"firstLine": "20",
+    			  		"lastLine": "40",
+  	  		  		"children": null
+				}
+			}
+		]
+	}
+}

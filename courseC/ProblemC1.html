@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<title>課題C1</title>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" href="sample.css">-->
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript" src="../debugger-like/lineNum.js"></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+
+    <script type="text/javascript">
+        function setLineNum() {
+            var id="DefaultDragTracker";
+            var lineNumPair = [
+                [1, 11],
+                [3, 46],
+                [5, 80],
+                [7, 96],
+                [9, 98],
+                [11, 112],
+                [13,115],
+                [18,124],
+                [21, 131],
+                [24, 135],
+                [26, 137],
+                [28, 153],
+                [30, 157],
+                [32, 159],
+                [34, 161],
+                [36, 165],
+                [39, 220]];
+            changeLineNum(lineNumPair, id);
+        }
+    </script>
+</head>
+
+<body onLoad="setLineNum()">
+<h1>課題C1</h1>
+
+<p>
+課題C1では，JHotDrawの図形移動機能について見ていきます．
+JHotDrawでは，選択状態にある図形をドラッグして移動することができます．
+ここでは，図形移動機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
+図形が選択されている状態でマウスボタンを押すと，<code>DefaultDragTracker</code> クラスの <code>mousePressed()</code> メソッド(以下，<code>DefaultDragTracker#mousePressed()</code> のように書く)が呼び出され，
+その中で，116行目から <code>view.getSelectedFigures()</code> が呼び出されて，選択状態にある図形の集合が戻り値として返されます．
+今回の実行で，ローカル変数 <code>f</code> に実際に代入されるのは，<code>RectangleFigure</code> クラスのインスタンスへの参照です．
+ここで，<code>Figure</code> は図形を表すJHotDrawのクラスで，<code>RectangleFigure</code> は <code>Figure</code> の子孫クラスにあたります．
+その後，マウスボタンを押したままドラッグすると，マウスカーソルが移動するたびに<code>DefaultDragTracker#mouseDragged()</code>が繰り返し呼び出され，その中で，159行目から <code>f.transform(tx)</code> が呼び出されて，
+ローカル変数 <code>f</code> で参照されている選択図形が移動していきます．
+</p>
+
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<pre class="brush:java;" id="DefaultDragTracker">
+package org.jhotdraw.draw.tool; // l.11
+:
+public class DefaultDragTracker extends AbstractTool implements DragTracker { // l.46
+    :
+    private HashSet&lt;Figure&gt; transformedFigures; // l.80
+    :
+    public void mousePressed(MouseEvent evt) { // l.96
+        :
+        DrawingView view = getView(); // l.98
+        :
+        if (...) { // l.112 (課題から外れるため一部省略)
+            :
+            transformedFigures = new HashSet&lt;Figure&gt;(); // l.115
+            for (Figure f : view.getSelectedFigures()) {
+                if (...) { // (課題から外れるため一部省略)
+                    transformedFigures.add(f);
+                    ..
+                } // l.124
+            }
+            ..
+        } // l.131
+    }
+    :
+    public void mouseDragged(MouseEvent evt) { // l.135
+        :
+        if (...) { // l.137 (課題から外れるため一部省略)
+            :
+            AffineTransform tx = ...; // l.153 (課題から外れるため一部省略)
+            :
+            for (Figure f : transformedFigures) { // l.157
+                :
+                f.transform(tx); // l.159
+                :
+            } // l.161
+            :
+        } // l.165
+    }
+    :
+} // l.220
+</pre>
+</div>
+
+<p>
+下記のリンク先には，
+<blockquote>
+    「選択された図形がJHotDrawのシステム内部でどのように管理され，図形移動機能の実行によってどのように取り出されて，移動していくか?」
+</blockquote>
+を理解するために抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
+まず，このソースコードを最初から最後まで追いかけて，ソースコードの全体の流れを把握してください．
+</p>
+
+<blockquote>
+    <p><a href="../debugger-like/debugger.html?key=3" target="_blank">JHotDrawの図形移動機能で実行されるソースコード（一部）</a></p>
+</blockquote>
+
+<p>
+このソースコードについて以下のアンケートにお答えください．
+</p>
+
+<blockquote>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScuwIhc3FMrjIrzM4lEmW5l-tHr4qr_vuGbje4tuOMm69Wuqw/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+</blockquote>
+
+<hr size="5">
+
+<h1>課題C1の可視化</h1>
+
+<p>
+課題C1について，UML(クラス図とシーケンス図)による表現，オブジェクト図に呼び出し木を埋め込んだ表記法による表現，オブジェクトの動きを表すアニメーションによる可視化を見比べて頂きます．<br>
+</p>
+
+<p>
+コードの流れをもう一度把握した後で，まずは以下の<strong>UML(クラス図とシーケンス図)</strong>による表現をご覧ください．
+</p>
+
+<blockquote>
+    <a href="../realPrograms/JHotDraw/defaultDragTracker/UML.html?title=課題C1" target="_blank">課題C1のクラス図とシーケンス図</a>
+</blockquote>
+
+<p>
+次に以下の<strong>オブジェクト図に呼び出し木を埋め込んだ表記法</strong>(内容についてはリンク先で説明)による表現をご覧ください．
+</p>
+
+<blockquote>
+    <a href="../realPrograms/JHotDraw/defaultDragTracker/ObjCallDiagram.html?title=課題C1" target="_blank">課題C1のオブジェクト図と呼び出し木による表現</a>
+</blockquote>
+
+<p>
+最後に，下記のリンク先の動画を視聴して下さい．<br>
+これらは，上記ソースコードを実行した際の<strong>オブジェクトの動きを表すアニメーション</strong>(内容についてはリンク先で説明)で，それぞれ，
+<ul>
+    <li><code>DefaultDragTracker</code> の118行目で，フィールド <code>transformedFigures</code> で参照されている <code>HashSet</code> クラスのインスタンスが，ローカル変数 <code>f</code> で参照されている <code>RectangleFigure</code> クラスのインスタンスと，<code>HashSet#add()</code> によって関連付けられるまでの経緯，</li>
+</ul>
+を表しています．
+</p>
+
+<blockquote>
+    <p><a href="../realPrograms/JHotDraw/defaultDragTracker/MagnetRON.html?title=課題C1&subject=HashSetのインスタンスとRectangleFigureのインスタンスの関連付け" target="_blank">HashSetのインスタンスとRectangleFigureのインスタンスの関連付けに関する可視化</a></p>
+</blockquote>
+
+<p>
+これらの表現とソースコードの内容を見比べながら，以下のアンケートにお答えください．
+</p>
+
+<blockquote>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjmYDnn-zNdyKhFN0PTnboSCEom-BKr0A6UVuqRA8ZEHwv4Q/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+</blockquote>
+
+<p style="margin-bottom:2em;"></p>
+<a href="ProblemC2.html">次へ</a>
+</body>
