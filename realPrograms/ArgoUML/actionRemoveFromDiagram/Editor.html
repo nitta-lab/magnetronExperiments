@@ -17,25 +17,23 @@
 
 <body onLoad="setLineNum()">
     <pre class="brush:java;" id="Editor">
-package org.tigris.gef.base; // l.29
+package org.tigris.gef.base;
 :
-public class Editor implements Serializable, MouseListener, // l.96
+public class Editor implements Serializable, MouseListener,
         MouseMotionListener, KeyListener {
     :
-    protected SelectionManager _selectionManager = new SelectionManager(this); // l.142
+    protected SelectionManager _selectionManager = new SelectionManager(this);
     :
-    protected LayerManager _layerManager = new LayerManager(this); // l.145
-    :
-    public SelectionManager getSelectionManager() { // l.644
+    public SelectionManager getSelectionManager() {
         return _selectionManager;
     }
     :
-} // l.998
+}
 </pre>
     <script type="text/javascript">
         function setLineNum() {
             var id = "Editor";
-            var lineNumPair = [[1, 29], [3, 96], [6, 142], [8, 145], [10, 644], [13, 998]];
+            var lineNumPair = [[1, 29], [3, 96], [6, 142], [8, 644], [12, 998]];
             changeLineNum(lineNumPair, id);
         }
     </script>

@@ -17,24 +17,24 @@
 
 <body onLoad="setLineNum()">
 <pre class="brush:java;" id="QuadNode">
-package org.jhotdraw.geom; // l.13
+package org.jhotdraw.geom;
 :
-public class QuadTree&lt;T&gt; implements Serializable { // l.30
+public class QuadTree&lt;T&gt; implements Serializable {
     :
     private QuadNode root;
     :
-    public Collection&lt;T&gt; findContains(Point2D.Double p) { // l.81
+    public Collection&lt;T&gt; findContains(Point2D.Double p) {
         HashSet&lt;T&gt; result = new HashSet&lt;T&gt;();
         root.findContains(p, result);
         :
-        return result; // l.89
+        return result;
     }
     :
-    private class QuadNode implements Serializable { // l.115
+    private class QuadNode implements Serializable {
         :
-        private HashMap&lt;T,Rectangle2D.Double&gt; objects; // l.124
+        private HashMap&lt;T,Rectangle2D.Double&gt; objects;
         :
-        public void findContains(Point2D.Double p, HashSet&lt;T&gt; result) { // l.222
+        public void findContains(Point2D.Double p, HashSet&lt;T&gt; result) {
             if (...) {
                 for (Map.Entry&lt;T,Rectangle2D.Double&gt; entry : objects.entrySet()) {
                     if (...) {
@@ -42,10 +42,10 @@ public class QuadTree&lt;T&gt; implements Serializable { // l.30
                     }
                 }
                 :
-            } // l.235
+            }
         }
         :
-    } // l.267
+    }
 }
 </pre>
 <script type="text/javascript">

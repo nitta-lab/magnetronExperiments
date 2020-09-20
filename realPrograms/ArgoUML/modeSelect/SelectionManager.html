@@ -18,34 +18,34 @@
 
 <body onLoad="setLineNum()">
     <pre class="brush:java;" id="SelectionManager">
-package org.tigris.gef.base; // l.28
+package org.tigris.gef.base;
 :
-public class SelectionManager implements Serializable, KeyListener, // l.77
+public class SelectionManager implements Serializable, KeyListener,
         MouseListener, MouseMotionListener {
     :
-    private List&lt;Selection&gt; selections = new ArrayList&lt;Selection&gt;(); // l.85
+    private List&lt;Selection&gt; selections = new ArrayList&lt;Selection&gt;();
     :
-    protected void addFig(Fig f) { // l.128
+    protected void addFig(Fig f) {
         if (...) {
             selections.add(makeSelectionFor(f));
         }
     }
     :
-    public void select(Fig f) { // l.174
+    public void select(Fig f) {
         :
-        addFig(f); // l.180
+        addFig(f);
         :
-    } // l.183
+    }
     :
-    public static Selection makeSelectionFor(Fig f) { // l.1128
+    public static Selection makeSelectionFor(Fig f) {
         Selection customSelection = f.makeSelection();
         if (customSelection != null) {
-            return customSelection; // コッチ
+            return customSelection;
         }
         :
-    } // l.1146
+    }
     :
-} // l.1293
+}
     </pre>
     <script type="text/javascript">
         function setLineNum() {

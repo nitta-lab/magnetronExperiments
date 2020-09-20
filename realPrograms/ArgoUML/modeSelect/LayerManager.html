@@ -17,17 +17,17 @@
 
 <body onLoad="setLineNum()">
     <pre class="brush:java;" id="LayerManager">
-package org.tigris.gef.base; // l.29
+package org.tigris.gef.base;
 :
-public class LayerManager implements java.io.Serializable { // l.48
+public class LayerManager implements java.io.Serializable {
     :
-    private Layer _activeLayer; // l.60
+    private Layer _activeLayer;
     :
-    public Fig hit(Rectangle r) { // l.269
+    public Fig hit(Rectangle r) {
         return (_activeLayer == null) ? null : _activeLayer.hit(r);
     }
     :
-} // l.378
+}
 </pre>
     <script type="text/javascript">
         function setLineNum() {

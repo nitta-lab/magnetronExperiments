@@ -17,28 +17,28 @@
 
 <body onLoad="setLineNum()">
 <pre class="brush:java;" id="DefaultDragTracker">
-package org.jhotdraw.draw.tool; // l.11
+package org.jhotdraw.draw.tool;
 :
-public class DefaultDragTracker extends AbstractTool implements DragTracker { // l.46
+public class DefaultDragTracker extends AbstractTool implements DragTracker {
 
     @Nullable
     protected Figure anchorFigure;
     :
-    @Override // l.95
+    @Override
     public void mousePressed(MouseEvent evt) {
         :
-        DrawingView view = getView(); // l.98
+        DrawingView view = getView();
 
-        if (...) { // l.100 (課題から外れるため一部省略)
+        if (...) { // (課題から外れるため一部省略)
             :
-        } else if (...) { // l.106
+        } else if (...) {
             :
-            view.addToSelection(anchorFigure); // l.109
+            view.addToSelection(anchorFigure);
         }
         :
-    } // l.132
+    }
     :
-    @Override // l.216
+    @Override
     public void setDraggedFigure(Figure f) {
         anchorFigure = f;
     }

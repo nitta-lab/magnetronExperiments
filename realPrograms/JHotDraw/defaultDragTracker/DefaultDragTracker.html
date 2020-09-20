@@ -17,47 +17,47 @@
 
 <body onLoad="setLineNum()">
 <pre class="brush:java;" id="DefaultDragTracker">
-package org.jhotdraw.draw.tool; // l.11
+package org.jhotdraw.draw.tool;
 :
-public class DefaultDragTracker extends AbstractTool implements DragTracker { // l.46
+public class DefaultDragTracker extends AbstractTool implements DragTracker {
     :
-    private HashSet&lt;Figure&gt; transformedFigures; // l.80
+    private HashSet&lt;Figure&gt; transformedFigures;
     :
-    @Override // l.95
+    @Override
     public void mousePressed(MouseEvent evt) {
         :
         DrawingView view = getView();
         :
-        if (...) { // l.112 (課題から外れるため一部省略)
+        if (...) { // (課題から外れるため一部省略)
             :
-            transformedFigures = new HashSet&lt;Figure&gt;(); // l.115
+            transformedFigures = new HashSet&lt;Figure&gt;();
             for (Figure f : view.getSelectedFigures()) {
                 if (...) { // (課題から外れるため一部省略)
                     transformedFigures.add(f);
                     :
-                } // l.124
+                }
             }
             :
-        } // l.131
+        }
     }
 
     @Override
     public void mouseDragged(MouseEvent evt) {
         :
-        if (!transformedFigures.isEmpty()) { // l.137
+        if (!transformedFigures.isEmpty()) {
             :
-            AffineTransform tx = ...; // l.153 (課題から外れるため一部省略)
+            AffineTransform tx = ...; // (課題から外れるため一部省略)
             :
-            for (Figure f : transformedFigures) { // l.157
+            for (Figure f : transformedFigures) {
                 :
                 f.transform(tx);
                 :
             }
             :
-        } // l.165
+        }
     }
     :
-} // l.220
+}
 </pre>
 <script type="text/javascript">
     function setLineNum() {

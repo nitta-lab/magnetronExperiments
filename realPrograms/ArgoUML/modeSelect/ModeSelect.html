@@ -18,25 +18,25 @@
 
 <body onLoad="setLineNum()">
     <pre class="brush:java;" id="ModeSelect">
-package org.tigris.gef.base; // l.27
+package org.tigris.gef.base;
 :
-public class ModeSelect extends FigModifyingModeImpl { // l.70
+public class ModeSelect extends FigModifyingModeImpl {
     :
-    private Point selectAnchor = ...; // l.74
+    private Point selectAnchor = ...;
     :
-    public void mousePressed(MouseEvent me) { // l.116
+    public void mousePressed(MouseEvent me) {
         :
-        selectAnchor = ...; // l.151
+        selectAnchor = ...;
         :
-        SelectionManager sm = editor.getSelectionManager(); // l.156
+        SelectionManager sm = editor.getSelectionManager();
         :
-        Fig underMouse = editor.hit(selectAnchor); // l.160
+        Fig underMouse = editor.hit(selectAnchor);
         Rectangle smallHitRect = ...;
         if (underMouse instanceof FigGroup) {
             underMouse = ((FigGroup) underMouse).deepSelect(smallHitRect);
         }
         :
-        if (underMouse != null) {  // l.183
+        if (underMouse != null) {
             if (...) {
                 :
             } else if (...) {
@@ -44,9 +44,9 @@ public class ModeSelect extends FigModifyingModeImpl { // l.70
             }
         }
         :
-    } // l.198
+    }
     :
-} // l.362
+}
     </pre>
     <script type="text/javascript">
         function setLineNum() {

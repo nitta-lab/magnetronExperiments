@@ -17,26 +17,26 @@
 
 <body onLoad="setLineNum()">
 <pre class="brush:java;" id="QuadTreeDrawing">
-package org.jhotdraw.draw; // l.11
+package org.jhotdraw.draw;
 :
-public class QuadTreeDrawing extends AbstractDrawing { // l.30
+public class QuadTreeDrawing extends AbstractDrawing {
 
     private QuadTree&lt;Figure&gt; quadTree = new QuadTree&lt;Figure&gt;();
     :
-    @Override // l.122
+    @Override
     public Figure findFigure(Point2D.Double p) {
         Collection&lt;Figure&gt; c = quadTree.findContains(p);
         switch (c.size()) { // (課題から外れるため一部省略)
             :
-            case 1: { // l.128
+            case 1: {
                 Figure f = c.iterator().next();
                 return (...) ? f : null; // (課題から外れるため一部省略)
             }
             :
-        } // l.140
+        }
     }
     :
-} // l.348
+}
 </pre>
 <script type="text/javascript">
     function setLineNum() {

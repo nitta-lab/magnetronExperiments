@@ -39,21 +39,21 @@ ArgoUMLでは，選択状態にある図形をDelキーを押して削除する�
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
 <pre class="brush:java;" id="ActionRemoveFromDiagram">
-package org.argouml.uml.diagram.ui; //l.39
+package org.argouml.uml.diagram.ui;
 :
-public class ActionRemoveFromDiagram extends AbstractAction { //l.60
+public class ActionRemoveFromDiagram extends AbstractAction {
     :
-    public void actionPerformed(ActionEvent ae) { // l.82
+    public void actionPerformed(ActionEvent ae) {
         Editor ce = Globals.curEditor();
         :
-        List&lt;Fig&gt; figs = ce.getSelectionManager().getFigs(); // l.85
+        List&lt;Fig&gt; figs = ce.getSelectionManager().getFigs();
         for (Fig f : figs) {
             if (...) { // (課題から外れるため一部省略)
                 if (f instanceof GraphElement) {
                     f.removeFromDiagram();
                 } else {
                     :
-                } // l.92
+                }
             }
         }
     }

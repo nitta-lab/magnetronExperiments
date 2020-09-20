@@ -17,26 +17,26 @@
 
 <body onLoad="setLineNum()">
     <pre class="brush:java;" id="LayerDiagram">
-package org.tigris.gef.base; // l.27
+package org.tigris.gef.base;
 :
-public class LayerDiagram extends Layer { // l.50
+public class LayerDiagram extends Layer {
     :
-    private List&lt;Fig&gt; contents = new ArrayList&lt;Fig&gt;(); // l.55
+    private List&lt;Fig&gt; contents = new ArrayList&lt;Fig&gt;();
 
-    public Fig hit(Rectangle r) { // l.227
+    public Fig hit(Rectangle r) {
 
         /* search backward so that highest item is found first */
         for (int i = contents.size() - 1; i >= 0; i--) {
             Fig f = (Fig) contents.get(i);
             if (...) {
-                return f; // コッチ
+                return f;
             }
         }
 
         return null;
     }
     :
-} // l.478
+}
 </pre>
     <script type="text/javascript">
         function setLineNum() {

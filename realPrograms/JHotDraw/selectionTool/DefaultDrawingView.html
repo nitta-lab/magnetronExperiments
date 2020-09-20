@@ -17,38 +17,38 @@
 
 <body onLoad="setLineNum()">
 <pre class="brush:java;" id="DefaultDrawingView">
-package org.jhotdraw.draw; // l.11
+package org.jhotdraw.draw;
 :
-public class DefaultDrawingView // l.46
+public class DefaultDrawingView
         extends JComponent
         implements DrawingView, EditableComponent {
     :
-    @Nullable // l.54
+    @Nullable
     private Drawing drawing;
     :
-    private Set&lt;Figure&gt; selectedFigures = new LinkedHashSet&lt;Figure&gt;(); // l.60
+    private Set&lt;Figure&gt; selectedFigures = new LinkedHashSet&lt;Figure&gt;();
     :
-    @Override // l.321
+    @Override
     @Nullable
     public Drawing getDrawing() {
         return drawing;
     }
     :
-    @Override // l.773
+    @Override
     public void addToSelection(Figure figure) {
         :
-        if (selectedFigures.add(figure)) { // l.780
+        if (selectedFigures.add(figure)) {
             :
-        } // l.802
+        }
     }
     :
-    @Override // l.1092
+    @Override
     public Figure findFigure(
             Point p) {
         return getDrawing().findFigure(viewToDrawing(p)); // viewToDrawing(p)の呼び出しは課題から外れるため省略
     }
     :
-} // l.1602
+}
 </pre>
 <script type="text/javascript">
     function setLineNum() {

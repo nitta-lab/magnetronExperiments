@@ -78,31 +78,31 @@ ArgoUMLでは，クラス図上に配置したクラスをクリックして選�
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
 <pre class="brush:java;" id="FigModifyingModeImpl">
-package org.tigris.gef.base; // l.29
+package org.tigris.gef.base;
 :
-public class FigModifyingModeImpl extends ModeImpl implements FigModifyingMode { // l.53
+public class FigModifyingModeImpl extends ModeImpl implements FigModifyingMode {
     :
-    protected Editor editor; // l.61
+    protected Editor editor;
     :
-} // l.179
+}
 </pre>
 </div>
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
 <pre class="brush:java;" id="ModeSelect">
-package org.tigris.gef.base; // l.27
+package org.tigris.gef.base;
 :
-public class ModeSelect extends FigModifyingModeImpl { // l.70
+public class ModeSelect extends FigModifyingModeImpl {
     :
-    private Point selectAnchor = ...; // l.74 (課題から外れるため一部省略)
+    private Point selectAnchor = ...; // (課題から外れるため一部省略)
     :
-    public void mousePressed(MouseEvent me) { // l.116
+    public void mousePressed(MouseEvent me) { //
         :
-        selectAnchor = ...; // l.151 (課題から外れるため一部省略)
+        selectAnchor = ...; // (課題から外れるため一部省略)
         :
-        SelectionManager sm = editor.getSelectionManager(); // l.156
+        SelectionManager sm = editor.getSelectionManager();
         :
-        Fig underMouse = editor.hit(selectAnchor); // l.160
+        Fig underMouse = editor.hit(selectAnchor);
         Rectangle smallHitRect = ...; // (課題から外れるため一部省略)
         if (underMouse instanceof FigGroup) {
             underMouse = ((FigGroup) underMouse).deepSelect(smallHitRect);
@@ -116,9 +116,9 @@ public class ModeSelect extends FigModifyingModeImpl { // l.70
             }
         }
         :
-    } // l.198
+    }
     :
-} // l.362
+}
 </pre>
 </div>
 
@@ -131,34 +131,34 @@ public class ModeSelect extends FigModifyingModeImpl { // l.70
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
 <pre class="brush:java;" id="SelectionManager">
-package org.tigris.gef.base; // l.28
+package org.tigris.gef.base;
 :
-public class SelectionManager implements Serializable, KeyListener, // l.77
+public class SelectionManager implements Serializable, KeyListener,
         MouseListener, MouseMotionListener {
     :
-    private List&lt;Selection&gt; selections = new ArrayList&lt;Selection&gt;(); // l.85
+    private List&lt;Selection&gt; selections = new ArrayList&lt;Selection&gt;();
     :
-    protected void addFig(Fig f) { // l.128
+    protected void addFig(Fig f) {
         if (...) { // (課題から外れるため一部省略)
             selections.add(makeSelectionFor(f));
         }
-    } // l.132
+    }
     :
-    public void select(Fig f) { // l.174
+    public void select(Fig f) {
         :
-        addFig(f); // l.180
+        addFig(f);
         :
-    } // l.183
+    }
     :
-    public static Selection makeSelectionFor(Fig f) { // l.1128
+    public static Selection makeSelectionFor(Fig f) {
         Selection customSelection = f.makeSelection();
         if (customSelection != null) {
             return customSelection;
         }
         :
-    } // l.1146
+    }
     :
-} // l.1293
+}
 </pre>
 </div>
 

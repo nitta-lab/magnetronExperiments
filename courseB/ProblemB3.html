@@ -58,45 +58,45 @@ JHotDrawでは，選択状態にある図形をドラッグして移動するこ
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
 <pre class="brush:java;" id="DefaultDragTracker">
-package org.jhotdraw.draw.tool; // l.11
+package org.jhotdraw.draw.tool;
 :
-public class DefaultDragTracker extends AbstractTool implements DragTracker { // l.46
+public class DefaultDragTracker extends AbstractTool implements DragTracker {
     :
-    private HashSet&lt;Figure&gt; transformedFigures; // l.80
+    private HashSet&lt;Figure&gt; transformedFigures;
     :
-    public void mousePressed(MouseEvent evt) { // l.96
+    public void mousePressed(MouseEvent evt) {
         :
-        DrawingView view = getView(); // l.98
+        DrawingView view = getView();
         :
-        if (...) { // l.112 (課題から外れるため一部省略)
+        if (...) { // (課題から外れるため一部省略)
             :
-            transformedFigures = new HashSet&lt;Figure&gt;(); // l.115
+            transformedFigures = new HashSet&lt;Figure&gt;();
             for (Figure f : view.getSelectedFigures()) {
                 if (...) { // (課題から外れるため一部省略)
                     transformedFigures.add(f);
                     ..
-                } // l.124
+                }
             }
             ..
-        } // l.131
+        }
     }
     :
-    public void mouseDragged(MouseEvent evt) { // l.135
+    public void mouseDragged(MouseEvent evt) {
         :
-        if (...) { // l.137 (課題から外れるため一部省略)
+        if (...) { // (課題から外れるため一部省略)
             :
-            AffineTransform tx = ...; // l.153 (課題から外れるため一部省略)
+            AffineTransform tx = ...; // (課題から外れるため一部省略)
             :
-            for (Figure f : transformedFigures) { // l.157
+            for (Figure f : transformedFigures) {
                 :
-                f.transform(tx); // l.159
+                f.transform(tx);
                 :
-            } // l.161
+            }
             :
-        } // l.165
+        }
     }
     :
-} // l.220
+}
 </pre>
 </div>
 

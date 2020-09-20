@@ -66,42 +66,42 @@ JHotDrawでは，図面上に配置された図形をクリックして選択す
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
 <pre class="brush:java;" id="SelectionTool">
-package org.jhotdraw.draw.tool; // l.11
+package org.jhotdraw.draw.tool;
 :
-public class SelectionTool extends AbstractTool { // l.54
+public class SelectionTool extends AbstractTool {
     :
-    private Tool tracker; // l.58
+    private Tool tracker;
     :
-    private DragTracker dragTracker; // l.70
+    private DragTracker dragTracker;
     :
-    public void mousePressed(MouseEvent evt) { // l.225
+    public void mousePressed(MouseEvent evt) {
         if (...) { // (課題から外れるため一部省略)
             :
-            DrawingView view = getView(); // l.228
+            DrawingView view = getView();
             :
             Tool newTracker = null;
             if (...) { // (課題から外れるため一部省略)
                 :
-            } else { // l.233
+            } else {
                 Figure figure;
                 :
-                if (... // l.237
+                if (...
                         ...
                         ...) { // (課題から外れるため一部省略)
                     :
-                } else { // l.252
+                } else {
                     :
                     if (figure == null) {
                         figure = view.findFigure(anchor);
                         ..
-                    } // l.274
+                    }
                 }
                 :
-                if (...) { // l.277 (課題から外れるため一部省略)
+                if (...) { // (課題から外れるため一部省略)
                     newTracker = getDragTracker(figure);
                 } else {
                     :
-                } // l.285
+                }
             }
             :
             if (newTracker != null) {
@@ -109,9 +109,9 @@ public class SelectionTool extends AbstractTool { // l.54
             }
             tracker.mousePressed(evt);
         }
-    } // l.293
+    }
     :
-} // l.377
+}
 </pre>
 </div>
 
