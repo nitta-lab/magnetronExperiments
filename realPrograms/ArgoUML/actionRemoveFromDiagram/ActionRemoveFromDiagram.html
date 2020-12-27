@@ -26,11 +26,10 @@ public class ActionRemoveFromDiagram extends AbstractAction {
         :
         List&lt;Fig&gt; figs = ce.getSelectionManager().getFigs();
         for (Fig f : figs) {
-                if (f instanceof GraphElement) {
-                    f.removeFromDiagram();
-                } else {
-                    :
-                }
+            if (f instanceof GraphElement) {
+                f.removeFromDiagram();
+            } else {
+                :
             }
         }
     }
