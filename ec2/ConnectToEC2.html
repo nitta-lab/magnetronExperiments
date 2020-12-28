@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>EC2インスタンスへのログイン方法</title>
+    <meta charset="UTF-8">
+    <link rel = "stylesheet" type = "text/css" href = "../prettify.css">
+    <script type="text/javascript">
+        function init(param) {
+            var course = "A";
+            if (param) {
+                var c = getParam('course', param);
+                if (c) course = c;
+            }
+            var next = document.getElementById("next");
+            next.href = "../tools/Forward/TraceDebugger_Forward.html?course=" + course;
+        }
+
+        function getParam(name, url) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+</head>
+<body onLoad="init(location.search)">
+<h1>EC2インスタンスへのログイン方法</h1>
+<p>
+    Windows Server 2019 の実験用サーバを Amazon EC2 インスタンスとして立ち上げております．
+    皆様のPCからは，リモートデスクトップを用いて以下のような手順でログインしていただきます．
+    Mac をご使用でリモートデスクトップをお持ちでない方は，App Store から「Microsoft Remote Desktop」をインストールしてください．
+    以下，Windows の画面を用いて手順の説明を行います．
+</p>
+
+<hr>
+
+<p>
+    <ol>
+    <li>
+        スタートメニューからWindowsアクセサリを選び，リモートデスクトップを起動します．
+        <div class = "image"><img src = "./images/ec2_1.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        接続先としてお送りしたipアドレスをご入力いただきます．
+        <div class = "image"><img src = "./images/ec2_2.jpg" class = "quarterSize"></div>
+    </li>
+    <li>
+        お送りしたユーザ名とパスワードでログインしていただきます．
+        <div class = "image"><img src = "./images/ec2_3.jpg" class = "quarterSize"></div>
+    </li>
+    <li>
+        「はい」を押します．
+        <div class = "image"><img src = "./images/ec2_4.jpg" class = "quarterSize"></div>
+    </li>
+    <li>
+        接続が成功すれば実験用サーバの画面が表示されます．
+        <div class = "image"><img src = "./images/ec2_5.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        デスクトップに配置してあるEclipseの起動アイコンをクリックし，起動確認を行います．以下のようにEclipseの画面が表示されたらオッケーです．
+        <div class = "image"><img src = "./images/ec2_6.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        作業が完了したら，スタートメニューから切断を選んで，ログアウトします．
+        <div class = "image"><img src = "./images/ec2_7.jpg" class = "halfSize"></div>
+    </li>
+    </ol>
+</p>
+
+<a id="next" href="../tools/Forward/TraceDebugger_Forward.html">順方向トレースデバッガの説明へ進む</a>
+
+</body>
+</html>
