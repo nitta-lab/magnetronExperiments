@@ -66,7 +66,10 @@ public class SelectionTool extends AbstractTool {
     protected void setTracker(Tool newTracker) {
         :
         tracker = newTracker;
-        :
+        if (tracker != null) {
+            tracker.activate(getEditor());
+            :
+        }
     }
     :
     protected DragTracker getDragTracker(Figure f) {
@@ -95,9 +98,8 @@ public class SelectionTool extends AbstractTool {
             [37,285],
             [40,288],
             [49, 300],
-            [51, 305],
-            [53, 323],
-            [61, 377]];
+            [56, 323],
+            [64, 377]];
         changeLineNum(lineNumPair, id);
     }
 </script>

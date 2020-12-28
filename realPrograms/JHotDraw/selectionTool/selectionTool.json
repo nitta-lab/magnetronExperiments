@@ -125,7 +125,27 @@
                 }],
                 "actualClass": "DelegationSelectionTool",
                 "children": [{
-                    "html": "AbstractTool.html"
+                    "callFrom": "302",
+                    "callee": {
+                        "html": "AbstractTool.html",
+                        "signature": "protected DrawingEditor getEditor()",
+                        "firstLine": "114",
+                        "lastLine": "114",
+                        "parents": null,
+                        "actualClass": "DelegationSelectionTool",
+                        "children": null
+                    }
+                }, {
+                    "callFrom": "302",
+                    "callee": {
+                        "html": "AbstractTool.html",
+                        "signature": "public void activate(DrawingEditor)",
+                        "firstLine": "88",
+                        "lastLine": "96",
+                        "parents": null,
+                        "actualClass": "DefaultDragTracker",
+                        "children": null
+                    }
                 }]
             }
         }, {

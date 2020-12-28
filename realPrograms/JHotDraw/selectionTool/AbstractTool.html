@@ -24,8 +24,18 @@ public abstract class AbstractTool extends AbstractBean implements Tool {
     protected DrawingEditor editor;
     protected Point anchor;
     :
+    @Override
+    public void activate(DrawingEditor editor) {
+        this.editor = editor;
+        :
+    }
+    :
     protected DrawingView getView() {
         return editor.getActiveView();
+    }
+
+    protected DrawingEditor getEditor() {
+        return editor;
     }
     :
 }
@@ -37,8 +47,10 @@ public abstract class AbstractTool extends AbstractBean implements Tool {
             [1, 11],
             [3, 42],
             [5, 54],
-            [8, 109],
-            [12, 494]];
+            [8, 86],
+            [12, 96],
+            [14, 109],
+            [22, 494]];
         changeLineNum(lineNumPair, id);
     }
 </script>
