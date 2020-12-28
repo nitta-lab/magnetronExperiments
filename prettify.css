@@ -1,0 +1,21 @@
+p.explanation {
+    margin-top: 50px;
+}
+li.explanation {
+    margin-top: 50px;
+}
+img.quarterSize {
+    width: 25%;
+    height: 25%;
+}
+img.halfSize {
+    width: 50%;
+    height: 50%;
+}
+img.threeQuartersSize {
+    width: 75%;
+    height: 75%;
+}
+div.image {
+    margin-top: 20px;
+}
