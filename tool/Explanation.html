@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>マグネトロンビューワの操作方法</title>
+    <meta charset="UTF-8">
+    <link rel = "stylesheet" type = "text/css" href = "../prettify.css">
+</head>
+<body>
+<h1>マグネトロンビューワについて</h1>
+<p>
+    マグネトロンビューワは，メソッドの呼び出しや，フィールドによるオブジェクトの参照，引数や戻り値によるオブジェクトの受け渡しなど，<br>
+    Javaプログラム実行時のオブジェクトの協調動作をアニメーションによって可視化するツールです．<br>
+    マグネトロンビューワは，Windows Server 2019 の実験用サーバ上に用意しております．<br>
+    各課題においてアニメーションによる可視化手法の評価を行う際に，リモートデスクトップからログインしてお使いください．<br>
+    以下，マグネトロンビューワの操作方法の説明を行います．<br>
+</p>
+
+<hr>
+
+<p>
+    <ol>
+    <li>
+        実験用サーバにログインし，デスクトップ上に配置してあるマグネトロンビューワ(MagnetRONViewer.jar)のアイコンをクリックして，マグネトロンビューワを起動してください．
+        <div class = "image"><img src = "./images/mgn_1.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        マグネトロンビューワが起動すると以下のように画面になります．
+        <div class = "image"><img src = "./images/mgn_2.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        マグネトロンビューワは，MagnetRON ファイルを読み込んで動作します．MagnetRON ファイルには，対象プログラムの実行時に収集したメソッド呼び出しや変数へのアクセスなどの時系列情報(実行トレース)と，実行トレースから各機能に関わる部分を抜き出すための抽出情報が記録されています．
+        ファイルメニューの「開く...」を選んで MagnetRON ファイルを開いてください．
+        <div class = "image"><img src = "./images/mgn_3.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        MagnetRON ファイルは，デスクトップの traces フォルダ(C:\Users\userXX\Desktop\traces\)に入っています．MagnetRON ファイルは，アプリケーション毎に用意しております．
+        ここでは，JHotDraw.magnet を開いてください．これは，JHotDraw というオープンソースソフトウェアの実行時の情報を収集した MagnetRON ファイルです．
+        <div class = "image"><img src = "./images/mgn_4.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        MagnetRON ファイルの読み込みには時間がかかる場合があります．ファイルの読み込みが完了するとメニューが操作できるようになります．課題に応じた機能を機能抽出メニューから選択します．
+        ここでは，JHotDraw 図形移動機能を選択しましょう．
+        <div class = "image"><img src = "./images/mgn_5.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        機能の抽出が完了するとアニメーションを再生できるようになります．再生ボタンを押してアニメーションを再生してください．
+        <div class = "image"><img src = "./images/mgn_6.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        アニメーションは一時停止したり再開したりすることができます．一時停止ボタンを押してアニメーションを一時停止しましょう．
+        <div class = "image"><img src = "./images/mgn_7.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        再び再生ボタンを押すと，アニメーションを再開することができます．
+        <div class = "image"><img src = "./images/mgn_6.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        また，アニメーション再生中に表示メニューを使ってアニメーション画面を拡大・縮小することも可能です．
+        <div class = "image"><img src = "./images/mgn_8.jpg" class = "halfSize"></div>
+    </li>
+    <li>
+        実験中は，アニメーションを何度再生していただいても構いません．ソースコードと照らし合わせながら再生していただくようお願いします．
+    </li>
+    </ol>
+</p>
+
+<a href="#" onClick="window.close();">閉じる</a>
+
+</body>
+</html>
