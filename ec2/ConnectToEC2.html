@@ -1,34 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>EC2インスタンスへのログイン方法</title>
+    <title>実験用サーバへのログイン方法</title>
     <meta charset="UTF-8">
     <link rel = "stylesheet" type = "text/css" href = "../prettify.css">
-    <script type="text/javascript">
-        function init(param) {
-            var course = "A";
-            if (param) {
-                var c = getParam('course', param);
-                if (c) course = c;
-            }
-            var next = document.getElementById("next");
-            next.href = "../tools/Forward/TraceDebugger_Forward.html?course=" + course;
-        }
-
-        function getParam(name, url) {
-            name = name.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
-    </script>
 </head>
-<body onLoad="init(location.search)">
-<h1>EC2インスタンスへのログイン方法</h1>
+<body>
+<h1>実験用サーバへのログイン方法</h1>
 <p>
-    Windows Server 2019 の実験用サーバを Amazon EC2 インスタンスとして立ち上げております．
+    Windows Server 2019 の実験用サーバを Amazon EC2 インスタンスとして用意しております．
     皆様のPCからは，リモートデスクトップを用いて以下のような手順でログインしていただきます．
     Mac をご使用でリモートデスクトップをお持ちでない方は，App Store から「Microsoft Remote Desktop」をインストールしてください．
     以下，Windows の画面を用いて手順の説明を行います．
@@ -59,7 +39,8 @@
         <div class = "image"><img src = "./images/ec2_5.jpg" class = "halfSize"></div>
     </li>
     <li>
-        デスクトップに配置してあるMagnetRONViewerの起動アイコンをクリックし，起動確認を行います．以下のようにMagnetRONViewerの画面が表示されたらオッケーです．
+        デスクトップに配置してあるマグネトロンビューワ(MagnetRONViewer.jar)の起動アイコンをクリックし，起動確認を行います．
+        以下のようにマグネトロンビューワの画面が表示されることを確認してください．
         <div class = "image"><img src = "./images/ec2_6.jpg" class = "halfSize"></div>
     </li>
     <li>
