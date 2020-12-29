@@ -29,8 +29,15 @@
 
 <p>
 課題C3では，ArgoUMLの削除機能について見ていきます．
-ArgoUMLでは，選択状態にある図形をDelキーを押して削除することができます．
-ここでは，削除機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
+ArgoUMLでは，選択状態にある図形をDelキーを押して削除することができます．<br>
+この課題では，
+
+<blockquote>
+    <strong>「選択された図形がArgoUMLのシステム内部でどのように管理され，削除機能の実行によってどのように取り出されて，削除されるか?」</strong>
+</blockquote>
+
+を理解することを目的とします．<br>
+まず，削除機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
 図形が選択されている状態でDelキーを押すと，<code>ActionRemoveFromDiagram</code> クラスの <code>actionPerformed()</code> メソッド(以下，<code>ActionRemoveFromDiagram#actionPerformed()</code> のように書く)が呼び出されます(以下の図を参照)．
 その中の89行目で <code>f.removeFromDiagram()</code> が実行され，ローカル変数 <code>f</code> で参照されている選択図形が削除されます．
 ここで，<code>Fig</code> は図形を表すArgoUML(正確にはArgoUML内部で用いられているGEFフレームワーク)のクラスで，
@@ -62,12 +69,8 @@ public class ActionRemoveFromDiagram extends AbstractAction {
 </div>
 
 <p>
-下記のリンク先には，
-<blockquote>
-    「選択された図形がArgoUMLのシステム内部でどのように管理され，削除機能の実行によってどのように取り出されて，削除されるか?」
-</blockquote>
-を理解するために抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
-まず，このソースコードを最初から最後まで追いかけて，ソースコードの全体の流れを把握してください．
+下記のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
+まず，このソースコードを最初から最後まで飛ばさずに追いかけて，ソースコードの全体の流れを把握してください．以下のアンケートでクラス名やメソッド名を問う設問にお答えいただきます．
 </p>
 
 <blockquote>

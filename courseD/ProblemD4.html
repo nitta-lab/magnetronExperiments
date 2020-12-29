@@ -66,8 +66,15 @@
 
 <p>
 課題D4では，ArgoUMLの選択機能について見ていきます．
-ArgoUMLでは，クラス図上に配置したクラスをクリックして選択することができます．
-ここでは，選択機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
+ArgoUMLでは，クラス図上に配置したクラスをクリックして選択することができます．<br>
+この課題では，
+
+<blockquote>
+    <strong>「配置された図形がArgoUMLのシステム内部でどのように管理され，選択機能の実行によってどのように取り出されて，どのように選択図形として登録されるか?」</strong>
+</blockquote>
+
+を理解することを目的とします．<br>
+まず，選択機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
 選択モードで図面上をクリックすると，<code>ModeSelect</code> クラスの <code>mousePressed()</code> メソッド(以下，<code>ModeSelect#mousePressed()</code> のように書く)が呼び出されます．
 その中で，160行目から <code>editor.hit(selectAnchor)</code> が呼び出され，クリックでヒットした図形が戻り値として返されます．
 今回の実行で，ローカル変数 <code>underMouse</code> に実際に代入されるのは，<code>FigClass</code> クラスのインスタンスへの参照です．
@@ -163,12 +170,8 @@ public class SelectionManager implements Serializable, KeyListener,
 </div>
 
 <p>
-下記のリンク先には，
-<blockquote>
-    「配置された図形がArgoUMLのシステム内部でどのように管理され，選択機能の実行によってどのように取り出されて，どのように選択図形として登録されるか?」
-</blockquote>
-を理解するために抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
-まず，このソースコードを最初から最後まで追いかけて，ソースコードの全体の流れを把握してください．
+下記のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
+まず，このソースコードを最初から最後まで飛ばさずに追いかけて，ソースコードの全体の流れを把握してください．
 </p>
 
 <blockquote>
