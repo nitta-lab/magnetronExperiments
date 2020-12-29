@@ -46,8 +46,15 @@
 
 <p>
 課題A3では，JHotDrawの図形移動機能について見ていきます．
-JHotDrawでは，選択状態にある図形をドラッグして移動することができます．
-ここでは，図形移動機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
+JHotDrawでは，選択状態にある図形をドラッグして移動することができます．<br>
+この課題では，
+
+<blockquote>
+    <strong>「選択された図形がJHotDrawのシステム内部でどのように管理され，図形移動機能の実行によってどのように取り出されて，移動していくか?」</strong>
+</blockquote>
+
+を理解することを目的とします．<br>
+まず，図形移動機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
 図形が選択されている状態でマウスボタンを押すと，<code>DefaultDragTracker</code> クラスの <code>mousePressed()</code> メソッド(以下，<code>DefaultDragTracker#mousePressed()</code> のように書く)が呼び出され，
 その中で，116行目から <code>view.getSelectedFigures()</code> が呼び出されて，選択状態にある図形の集合が戻り値として返されます．
 今回の実行で，ローカル変数 <code>f</code> に実際に代入されるのは，<code>RectangleFigure</code> クラスのインスタンスへの参照です．
@@ -101,12 +108,8 @@ public class DefaultDragTracker extends AbstractTool implements DragTracker {
 </div>
 
 <p>
-下記のリンク先には，
-<blockquote>
-    「選択された図形がJHotDrawのシステム内部でどのように管理され，図形移動機能の実行によってどのように取り出されて，移動していくか?」
-</blockquote>
-を理解するために抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
-まず，このソースコードを最初から最後まで追いかけて，ソースコードの全体の流れを把握してください．
+下記のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
+まず，このソースコードを最初から最後まで飛ばさずに追いかけて，ソースコードの全体の流れを把握してください．
 </p>
 
 <blockquote>
