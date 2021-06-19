@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="QuadNode">
+package org.jhotdraw.geom;
+:
+public class QuadTree&lt;T&gt; implements Serializable {
+    :
+    private QuadNode root;
+    :
+    public Collection&lt;T&gt; findContains(Point2D.Double p) {
+        HashSet&lt;T&gt; result = new HashSet&lt;T&gt;();
+        root.findContains(p, result);
+        :
+        return result;
+    }
+    :
+    private class QuadNode implements Serializable {
+        :
+        private HashMap&lt;T,Rectangle2D.Double&gt; objects;
+        :
+        public void findContains(Point2D.Double p, HashSet&lt;T&gt; result) {
+            if (...) {
+                for (Map.Entry&lt;T,Rectangle2D.Double&gt; entry : objects.entrySet()) {
+                    if (...) {
+                        result.add(entry.getKey());
+                    }
+                }
+                :
+            }
+        }
+        :
+    }
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="QuadNode";
+        var lineNumPair = [
+            [1, 13],
+            [3, 30],
+            [7, 81],
+            [11, 89],
+            [14, 115],
+            [16, 124],
+            [18, 222],
+            [26, 235],
+            [29, 267]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

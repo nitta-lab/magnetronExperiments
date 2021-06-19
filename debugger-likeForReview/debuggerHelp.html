@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>How to operate the debugger-like view</title>
+    <style type="text/css">
+        img.debug { zoom: 0.75; }
+        img.ui { zoom: 1.5; }
+    </style>
+</head>
+<body>
+<h1>How to operate the debugger-like view</h1>
+
+<p>
+With respect to the real-world programs, we extract only the source code related to each subject.
+    The extracted source code of a real-world program is presented on the website in a Eclipse’s debugger-like view.
+    The debugger-like view allows the participants to control the program execution flow stepping through the source code. <br>
+    First, press the debug button to start debugging.
+    </p>
+
+<img src="../images/debug1ForReview.jpg" class="debug">
+
+<p>
+    The debugger-like view is displayed on the left, and the running line is highlighted in light green.
+</p>
+
+<img src="../images/debug2.jpg" class="debug">
+
+<p>
+    If you press the second step into button from the left here, you will move to the called destination, and the called destination method will also be stacked on the stack on the debugger-like view.
+</p>
+
+<img src="../images/debug3.jpg" class="debug">
+
+<p>
+    The description of each button is as follows:
+</p>
+
+<img src="../images/debug4.jpg" class="ui"><br>
+
+<p>
+    <ul>
+    <li>If you press the leftmost button, debug execution will resume from the beginning even during debug execution.</li>
+    <li>Press the second button from the left to step over to the called method, </li>
+    <li>Press the third button from the left to step into the next line in the same method, </li>
+    <li>Press the rightmost button to step return to the calling method.</li>
+    </ul>
+    Note that the website's back button may not work properly on the debugger-like view.
+</p>
+
+
+<a href="#" onClick="window.close();">Close</a>
+</body>
+</html>

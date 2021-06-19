@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+    <pre class="brush:java;" id="ModeSelect">
+package org.tigris.gef.base;
+:
+public class ModeSelect extends FigModifyingModeImpl {
+    :
+    private Point selectAnchor = ...;
+    :
+    public void mousePressed(MouseEvent me) {
+        :
+        selectAnchor = ...;
+        :
+        SelectionManager sm = editor.getSelectionManager();
+        :
+        Fig underMouse = editor.hit(selectAnchor);
+        Rectangle smallHitRect = ...;
+        if (underMouse instanceof FigGroup) {
+            underMouse = ((FigGroup) underMouse).deepSelect(smallHitRect);
+        }
+        :
+        if (underMouse != null) {
+            if (...) {
+                :
+            } else if (...) {
+                sm.select(underMouse);
+            }
+        }
+        :
+    }
+    :
+}
+    </pre>
+    <script type="text/javascript">
+        function setLineNum() {
+            var id = "ModeSelect";
+            var lineNumPair = [
+                [1, 27],
+                [3, 70],
+                [5, 74],
+                [7, 116],
+                [9, 151],
+                [11, 156],
+                [13, 160],
+                [19, 183],
+                [27, 198],
+                [29, 362]
+            ];
+            changeLineNum(lineNumPair, id);
+        }
+
+    </script>
+
+</body>
+
+</html>

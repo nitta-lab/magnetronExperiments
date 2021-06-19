@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+    <pre class="brush:java;" id="Editor">
+package org.tigris.gef.base;
+:
+public class Editor implements Serializable, MouseListener,
+        MouseMotionListener, KeyListener {
+    :
+    protected SelectionManager _selectionManager = new SelectionManager(this);
+    :
+    protected LayerManager _layerManager = new LayerManager(this);
+    :
+    public LayerManager getLayerManager() {
+        return _layerManager;
+    }
+    :
+    protected static Rectangle _hitRect = ...
+            ...;
+    :
+    public final Fig hit(Point p) {
+        :
+        return hit(_hitRect);
+    }
+    :
+    public Fig hit(Rectangle r) {
+        Fig f = getLayerManager().hit(r);
+        return f;
+    }
+    :
+    public SelectionManager getSelectionManager() {
+        return _selectionManager;
+    }
+    :
+}
+</pre>
+    <script type="text/javascript">
+        function setLineNum() {
+            var id = "Editor";
+            var lineNumPair = [[1, 29], [3, 96], [6, 142], [8, 145], [10, 329], [14, 437], [17, 444], [22, 462], [27, 644], [31, 998]];
+            changeLineNum(lineNumPair, id);
+        }
+    </script>
+
+</body></html>

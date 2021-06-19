@@ -1,0 +1,24 @@
+/*タブタイトルスタイル*/
+.tab-title {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: .5em .5em 0 0;
+    border-bottom: none;
+    box-shadow: -1px -1px 0px #ccc;
+    display: table;
+    padding: 5px 5px 1px 3px;
+    position: relative;
+    margin-bottom: 0px;
+    z-index: 10;
+}
+
+/*タブ内容スタイル*/
+.tab-content {
+    border: 1px solid #ccc;
+    box-shadow: 0 0 3px gray;
+    margin-top: -2px;
+    padding: 0px 15px 5px 3px;
+    position: relative;
+    z-index: 0;
+    display:inline-block;
+}

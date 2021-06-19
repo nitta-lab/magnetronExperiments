@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+    <pre class="brush:java;" id="ActionRemoveFromDiagram">
+package org.argouml.uml.diagram.ui;
+:
+public class ActionRemoveFromDiagram extends AbstractAction {
+    :
+    public void actionPerformed(ActionEvent ae) {
+        Editor ce = Globals.curEditor();
+        :
+        List&lt;Fig&gt; figs = ce.getSelectionManager().getFigs();
+        for (Fig f : figs) {
+            if (f instanceof GraphElement) {
+                f.removeFromDiagram();
+            } else {
+                :
+            }
+        }
+    }
+}
+</pre>
+    <script type="text/javascript">
+        function setLineNum() {
+            var id="ActionRemoveFromDiagram";
+            var lineNumPair = [[1, 39], [3, 60], [5, 82]];
+            changeLineNum(lineNumPair, id);
+        }
+    </script>
+
+</body></html>

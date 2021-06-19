@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="AbstractTool">
+package org.jhotdraw.draw.tool;
+:
+public abstract class AbstractTool extends AbstractBean implements Tool {
+    :
+    protected DrawingEditor editor;
+    protected Point anchor;
+    :
+    @Override
+    public void activate(DrawingEditor editor) {
+        this.editor = editor;
+        :
+    }
+    :
+    protected DrawingView getView() {
+        return editor.getActiveView();
+    }
+
+    protected DrawingEditor getEditor() {
+        return editor;
+    }
+    :
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="AbstractTool";
+        var lineNumPair = [
+            [1, 11],
+            [3, 42],
+            [5, 54],
+            [8, 86],
+            [12, 96],
+            [14, 109],
+            [22, 494]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>
