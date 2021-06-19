@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+    <pre class="brush:java;" id="LayerDiagram">
+package org.tigris.gef.base;
+:
+public class LayerDiagram extends Layer {
+    :
+    private List&lt;Fig&gt; contents = new ArrayList&lt;Fig&gt;();
+
+    public Fig hit(Rectangle r) {
+
+        /* search backward so that highest item is found first */
+        for (int i = contents.size() - 1; i >= 0; i--) {
+            Fig f = (Fig) contents.get(i);
+            if (...) {
+                return f;
+            }
+        }
+
+        return null;
+    }
+    :
+}
+</pre>
+    <script type="text/javascript">
+        function setLineNum() {
+            var id = "LayerDiagram";
+            var lineNumPair = [[1, 27], [3, 50], [5, 55], [7, 227], [20, 478]];
+            changeLineNum(lineNumPair, id);
+        }
+    </script>
+
+</body></html>

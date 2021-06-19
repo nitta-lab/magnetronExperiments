@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="toolBar.js"></script>
+    <script type="text/javascript" src="srcCode.js"></script>
+    <script type="text/javascript" src="callStack.js"></script>
+    <style type="text/css">
+        .titlebar {
+            display: table;
+            width: 100%;
+        }
+        .space {
+            display: table-cell;
+            text-align: left;
+        }
+        .ui {
+            display: table-cell;
+            text-align: center;
+        }
+        .help {
+            display: table-cell;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="titlebar">
+        <p class="space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <p class="ui">
+        <input type="image" id="bt_debug" src="../images/debug_view.png" alt="debug" onclick="onRestartSrcCode(), onRestartCallStack(), isStepReturn()" title="Debug">
+
+        <img src="../images/blank.png" alt="blank" style="border-left:1px solid #ccc;">
+
+        <input type="image" id="bt_stepinto" src="../images/stepinto_co_disable.png" alt="stepinto" onclick="stepIntoSrcCode(), stepIntoCallStack(), isStepReturn()" title="Step Into" disabled>
+
+        <input type="image" id="bt_stepover" src="../images/stepover_co_disable.png" alt="stepover" onclick="stepOverSrcCode(), stepOverCallStack(), isStepReturn()" title="Step Over" disabled>
+
+        <input type="image" id="bt_stepreturn" src="../images/stepreturn_co_disable.png" alt="stepreturn" onclick="stepReturnSrcCode(), stepReturnCallStack(), isStepReturn()" title="Step Return" disabled>
+        </p>
+        <p class="help">
+        <a href="debuggerHelp.html" target="_blank">Help for this debugger-like view</a>
+        </p>
+    </div>
+</body>
+
+</html>

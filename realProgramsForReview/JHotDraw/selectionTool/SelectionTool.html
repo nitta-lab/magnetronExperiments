@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="SelectionTool">
+package org.jhotdraw.draw.tool;
+:
+public class SelectionTool extends AbstractTool {
+    :
+    private Tool tracker;
+    :
+    private DragTracker dragTracker;
+    :
+    @Override
+    public void mousePressed(MouseEvent evt) {
+        if (...) { // (Partially omitted because it is outside the subject)
+            :
+            DrawingView view = getView();
+            :
+            Tool newTracker = null;
+            if (...) { // (Partially omitted because it is outside the subject)
+                :
+            } else {
+                Figure figure;
+                :
+                if (...
+                        ...
+                        ...) { // (Partially omitted because it is outside the subject)
+                    :
+                } else {
+                    :
+                    if (figure == null) {
+                        figure = view.findFigure(anchor);
+                        :
+                    }
+                }
+
+                if (...) { // (Partially omitted because it is outside the subject)
+                    newTracker = getDragTracker(figure);
+                } else {
+                    :
+                }
+            }
+
+            if (newTracker != null) {
+                setTracker(newTracker);
+            }
+            tracker.mousePressed(evt);
+        }
+    }
+
+    protected void setTracker(Tool newTracker) {
+        :
+        tracker = newTracker;
+        if (tracker != null) {
+            tracker.activate(getEditor());
+            :
+        }
+    }
+    :
+    protected DragTracker getDragTracker(Figure f) {
+        if (dragTracker == null) {
+            dragTracker = new DefaultDragTracker();
+        }
+        dragTracker.setDraggedFigure(f);
+        return dragTracker;
+    }
+    :
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="SelectionTool";
+        var lineNumPair = [
+            [1, 11],
+            [3, 54],
+            [5, 58],
+            [7, 70],
+            [9, 224],
+            [21, 237],
+            [25, 252],
+            [27,269],
+            [30,274],
+            [37,285],
+            [40,288],
+            [49, 300],
+            [56, 323],
+            [64, 377]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="DefaultDragTracker">
+package org.jhotdraw.draw.tool;
+:
+public class DefaultDragTracker extends AbstractTool implements DragTracker {
+
+    @Nullable
+    protected Figure anchorFigure;
+    :
+    @Override
+    public void mousePressed(MouseEvent evt) {
+        :
+        DrawingView view = getView();
+
+        if (...) { // (Partially omitted because it is outside the subject)
+            :
+        } else if (...) {
+            :
+            view.addToSelection(anchorFigure);
+        }
+        :
+    }
+    :
+    @Override
+    public void setDraggedFigure(Figure f) {
+        anchorFigure = f;
+    }
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="DefaultDragTracker";
+        var lineNumPair = [
+            [1, 11],
+            [3, 46],
+            [8, 95],
+            [11, 98],
+            [15,106],
+            [17,109],
+            [20, 132],
+            [22, 216]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

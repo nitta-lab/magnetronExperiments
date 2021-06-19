@@ -1,0 +1,242 @@
+{
+    "root": {
+        "html": "ModeSelect.html",
+        "signature": "public void mousePressed(MouseEvent)",
+        "firstLine": "151",
+        "lastLine": "187",
+        "parents": [{
+            "html": "FigModifyingModeImpl.html"
+        }],
+        "actualClass": null,
+        "children": [{
+            "callFrom": "156",
+            "callee": {
+                "html": "Editor.html",
+                "signature": "public SelectionManager getSelectionManager()",
+                "firstLine": "645",
+                "lastLine": "645",
+                "parents": null,
+                "actualClass": null,
+                "children": null
+            }
+        }, {
+            "callFrom": "160",
+            "callee": {
+                "html": "Editor.html",
+                "signature": "public final Fig hit(Point)",
+                "firstLine": "446",
+                "lastLine": "446",
+                "parents": null,
+                "actualClass": null,
+                "children": [{
+                    "callFrom": "446",
+                    "callee": {
+                        "html": "Editor.html",
+                        "signature": "public Fig hit(Rectangle)",
+                        "firstLine": "463",
+                        "lastLine": "464",
+                        "parents": null,
+                        "actualClass": null,
+                        "children": [{
+                            "callFrom": "463",
+                            "callee": {
+                                "html": "Editor.html",
+                                "signature": "public LayerManager getLayerManager()",
+                                "firstLine": "330",
+                                "lastLine": "330",
+                                "parents": null,
+                                "actualClass": null,
+                                "children": null
+                            }
+                        }, {
+                            "callFrom": "463",
+                            "callee": {
+                                "html": "LayerManager.html",
+                                "signature": "public Fig hit(Rectangle)",
+                                "firstLine": "270",
+                                "lastLine": "270",
+                                "parents": null,
+                                "actualClass": null,
+                                "children": [{
+                                    "callFrom": "270",
+                                    "callee": {
+                                        "html": "LayerDiagram.html",
+                                        "signature": "public Fig hit(Rectangle)",
+                                        "firstLine": "230",
+                                        "lastLine": "233",
+                                        "parents": null,
+                                        "actualClass": "LayerPerspectiveMutable",
+                                        "children": null
+                                    }
+                                }]
+                            }
+                        }]
+                    }
+                }]
+            }
+        }, {
+            "callFrom": "163",
+            "callee": {
+                "html": "FigGroup.html",
+                "signature": "public Fig deepSelect(Rectangle)",
+                "firstLine": "648",
+                "lastLine": "648",
+                "parents": null,
+                "actualClass": null,
+                "children": null
+            }
+        }, {
+            "callFrom": "187",
+            "callee": {
+                "html": "SelectionManager.html",
+                "signature": "public void select(Fig)",
+                "firstLine": "180",
+                "lastLine": "183",
+                "parents": null,
+                "actualClass": null,
+                "children": [{
+                    "callFrom": "180",
+                    "callee": {
+                        "html": "SelectionManager.html",
+                        "signature": "protected void addFig(Fig)",
+                        "firstLine": "129",
+                        "lastLine": "132",
+                        "parents": null,
+                        "actualClass": null,
+                        "children": [{
+                            "callFrom": "130",
+                            "callee": {
+                                "html": "SelectionManager.html",
+                                "signature": "public static Selection makeSelectionFor(Fig)",
+                                "firstLine": "1129",
+                                "lastLine": "1131",
+                                "parents": null,
+                                "actualClass": null,
+                                "children": [{
+                                    "callFrom": "1129",
+                                    "callee": {
+                                        "html": "FigClass.html",
+                                        "signature": "public Selection makeSelection()",
+                                        "firstLine": "125",
+                                        "lastLine": "125",
+                                        "parents": [{
+                                                    "html": "FigClassifierBox.html"
+                                                }, {
+                                                    "html": "FigCompartmentBox.html"
+                                                }, {
+                                                    "html": "FigNodeModelElement.html"
+                                                }, {
+                                                    "html": "FigNode.html"
+                                                }, {
+                                                    "html": "FigGroup.html"
+                                                }, {
+                                                    "html": "Fig.html"
+                                                }],
+                                        "actualClass": null,
+                                        "children": [{
+                                            "callFrom": "125",
+                                            "callee": {
+                                                "html": "SelectionClass.html",
+                                                "signature": "public SelectionClass(Fig)",
+                                                "firstLine": "109",
+                                                "lastLine": "110",
+                                                "parents": [{
+                                                    "html": "SelectionClassifierBox.html"
+                                                }, {
+                                                    "html": "SelectionNodeClarifiers2.html"
+                                                }, {
+                                                    "html": "SelectionButtons.html"
+                                                }, {
+                                                    "html": "SelectionResize.html"
+                                                }, {
+                                                    "html": "Selection.html"
+                                                }],
+                                                "actualClass": null,
+                                                "children": [{
+                                                    "callFrom": "109",
+                                                    "callee": {
+                                                        "html": "SelectionClassifierBox.html",
+                                                        "signature": "public SelectionClassifierBox(Fig)",
+                                                        "firstLine": "76",
+                                                        "lastLine": "83",
+                                                        "parents": [{
+                                                            "html": "SelectionNodeClarifiers2.html"
+                                                        }, {
+                                                            "html": "SelectionButtons.html"
+                                                        }, {
+                                                            "html": "SelectionResize.html"
+                                                        }, {
+                                                            "html": "Selection.html"
+                                                        }],
+                                                        "actualClass": "SelectionClass",
+                                                        "children": [{
+                                                            "callFrom": "76",
+                                                            "callee": {
+                                                                "html": "SelectionNodeClarifiers2.html",
+                                                                "signature": "public SelectionNodeClarifiers2(Fig)",
+                                                                "firstLine": "107",
+                                                                "lastLine": "108",
+                                                                "parents": [{
+                                                                    "html": "SelectionButtons.html"
+                                                                }, {
+                                                                    "html": "SelectionResize.html"
+                                                                }, {
+                                                                    "html": "Selection.html"
+                                                                }],
+                                                                "actualClass": "SelectionClass",
+                                                                "children": [{
+                                                                    "callFrom": "107",
+                                                                    "callee": {
+                                                                        "html": "SelectionButtons.html",
+                                                                        "signature": "public SelectionButtons(Fig)",
+                                                                        "firstLine": "92",
+                                                                        "lastLine": "94",
+                                                                        "parents": [{
+                                                                            "html": "SelectionResize.html"
+                                                                        }, {
+                                                                            "html": "Selection.html"
+                                                                        }],
+                                                                        "actualClass": "SelectionClass",
+                                                                        "children": [{
+                                                                            "callFrom": "92",
+                                                                            "callee": {
+                                                                                "html": "SelectionResize.html",
+                                                                                "signature": "public SelectionResize(Fig)",
+                                                                                "firstLine": "68",
+                                                                                "lastLine": "69",
+                                                                                "parents": [{
+                                                                                    "html": "Selection.html"
+                                                                                }],
+                                                                                "actualClass": "SelectionClass",
+                                                                                "children": [{
+                                                                                    "callFrom": "68",
+                                                                                    "callee": {
+                                                                                        "html": "Selection.html",
+                                                                                        "signature": "public Selection(Fig)",
+                                                                                        "firstLine": "65",
+                                                                                        "lastLine": "75",
+                                                                                        "parents": null,
+                                                                                        "actualClass": "SelectionClass",
+                                                                                        "children": null
+                                                                                    }
+                                                                                }]
+                                                                            }
+                                                                        }]
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }]
+                                                    }
+                                                }]
+                                            }
+                                        }]
+                                    }
+                                }]
+                            }
+                        }]
+                    }
+                }]
+            }
+        }]
+    }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+    <pre class="brush:java;" id="LayerManager">
+package org.tigris.gef.base;
+:
+public class LayerManager implements java.io.Serializable {
+    :
+    private Layer _activeLayer;
+    :
+    public Fig hit(Rectangle r) {
+        return (_activeLayer == null) ? null : _activeLayer.hit(r);
+    }
+    :
+}
+</pre>
+    <script type="text/javascript">
+        function setLineNum() {
+            var id = "LayerManager";
+            var lineNumPair = [[1, 29], [3, 48], [5, 60], [7, 269], [11, 378]];
+            changeLineNum(lineNumPair, id);
+        }
+    </script>
+
+</body></html>

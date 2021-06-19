@@ -1,0 +1,46 @@
+{
+    "root": {
+        "html": "DefaultDragTracker.html",
+        "signature": "public void mousePressed(MouseEvent)",
+        "firstLine": "97",
+        "lastLine": "159",
+        "parents": [{
+            "html": "AbstractTool.html"
+        }],
+        "actualClass": null,
+        "children": [{
+            "callFrom": "98",
+            "callee": {
+                "html": "AbstractTool.html",
+                "signature": "protected DrawingView getView()",
+                "firstLine": "110",
+                "lastLine": "110",
+                "parents": null,
+                "actualClass": "DefaultDragTracker",
+                "children": [{
+                    "callFrom": "110",
+                    "callee": {
+                        "html": "DefaultDrawingEditor.html",
+                        "signature": "public DrawingView getActiveView()",
+                        "firstLine": "161",
+                        "lastLine": "161",
+                        "parents": null,
+                        "actualClass": null,
+                        "children": null
+                    }
+                }]
+            }
+        }, {
+            "callFrom": "116",
+            "callee": {
+                "html": "DefaultDrawingView.html",
+                "signature": "public Set<Figure> getSelectedFigures()",
+                "firstLine": "931",
+                "lastLine": "931",
+                "parents": null,
+                "actualClass": null,
+                "children": null
+            }
+        }]
+    }
+}

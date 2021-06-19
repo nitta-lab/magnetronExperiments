@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+    <pre class="brush:java;" id="SelectionManager">
+package org.tigris.gef.base;
+:
+public class SelectionManager implements Serializable, KeyListener,
+        MouseListener, MouseMotionListener {
+    :
+    private List&lt;Selection&gt; selections = new ArrayList&lt;Selection&gt;();
+    :
+    protected void addFig(Fig f) {
+        if (...) {
+            selections.add(makeSelectionFor(f));
+        }
+    }
+    :
+    public void select(Fig f) {
+        :
+        addFig(f);
+        :
+    }
+    :
+    public static Selection makeSelectionFor(Fig f) {
+        Selection customSelection = f.makeSelection();
+        if (customSelection != null) {
+            return customSelection;
+        }
+        :
+    }
+    :
+}
+    </pre>
+    <script type="text/javascript">
+        function setLineNum() {
+            var id = "SelectionManager";
+            var lineNumPair = [
+                [1, 28],
+                [3, 77],
+                [6, 85],
+                [8, 128],
+                [14, 174],
+                [16, 180],
+                [18, 183],
+                [20, 1128],
+                [26, 1146],
+                [28, 1293]
+            ];
+            changeLineNum(lineNumPair, id);
+        }
+
+    </script>
+
+</body>
+
+</html>
