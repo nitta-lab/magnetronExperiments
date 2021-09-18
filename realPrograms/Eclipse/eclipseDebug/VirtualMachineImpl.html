@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="VirtualMachineImpl">
+package org.eclipse.jdi.internal;
+:
+public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine, org.eclipse.jdi.hcr.VirtualMachine, org.eclipse.jdi.VirtualMachine {
+    :
+    private EventQueueImpl fEventQueue;
+    :
+    private PacketReceiveManager fPacketReceiveManager;
+    :
+	public final PacketReceiveManager packetReceiveManager() {
+		return fPacketReceiveManager;
+	}
+    :
+	public EventQueue eventQueue() {
+		return fEventQueue;
+	}
+    :
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="VirtualMachineImpl";
+        var lineNumPair = [
+            [1, 11],
+            [3, 61],
+            [5, 84],
+            [7, 155],
+            [9, 317],
+            [13, 647],
+            [17, 1476]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

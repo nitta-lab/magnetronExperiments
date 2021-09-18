@@ -120,24 +120,29 @@ function createCallStack() {
 
     var eP = parent.callStackFrame.document.createElement("p");
     var eImg = parent.callStackFrame.document.createElement("img");
-    var splitSignature = (parent.curRoot.signature).split(" ");
+    var methodSignature = parent.curRoot.signature;
+    methodSignature = methodSignature.substring(0, methodSignature.lastIndexOf("(")); // "("までの部分文字列
+    methodSignature = methodSignature.split(" "); // " "でメソッド名を分割
+    methodSignature = methodSignature[methodSignature.length - 1];
+    var parameterSignature = parent.curRoot.signature;
+    parameterSignature = parameterSignature.substring(parameterSignature.lastIndexOf("(")); // "("から最後までの部分文字列
     var newCallStackText;
-    if (splitSignature.length > 3) {
-        for(var i = 3; i < splitSignature.length; i++) {
-            splitSignature[2] += " " + splitSignature[i];
-        }
-        splitSignature.splice(3, splitSignature.length - 3) ;
-    }
-    if (splitSignature[splitSignature.length - 1].includes(parent.curClassName)) {
-        splitSignature[splitSignature.length - 1] =
-            splitSignature[splitSignature.length - 1].replace(parent.curClassName, "<init>")
+//    var splitSignature = (parent.curRoot.signature).split(" "); // " "でメソッド名を分割
+//    if (splitSignature.length > 3) {
+//        for(var i = 3; i < splitSignature.length; i++) {
+//            splitSignature[2] += " " + splitSignature[i];
+//        }
+//        splitSignature.splice(3, splitSignature.length - 3) ;
+//    }
+    if (methodSignature.includes(parent.curClassName)) {
+        methodSignature = methodSignature.replace(parent.curClassName, "<init>")
     }
     if (!parent.curRoot.actualClass) {
         newCallStackText =
-            parent.curClassName + "." + splitSignature[splitSignature.length - 1] + " line: " + parent.stack[parent.stack.length - 1].line;
+            parent.curClassName + "." + methodSignature + parameterSignature + " line: " + parent.stack[parent.stack.length - 1].line;
     } else {
         newCallStackText =
-            parent.curRoot.actualClass + "(" + parent.curClassName + ")." + splitSignature[splitSignature.length - 1] + " line: " + parent.stack[parent.stack.length - 1].line;
+            parent.curRoot.actualClass + "(" + parent.curClassName + ")." + methodSignature + parameterSignature + " line: " + parent.stack[parent.stack.length - 1].line;
 
     }
     var newCallStackNode = parent.callStackFrame.document.createTextNode(newCallStackText);

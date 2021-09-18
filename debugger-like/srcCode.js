@@ -80,6 +80,13 @@ function loadParentsSrcCode(parents) {
 }
 
 function loadSrcCode(curHtml, from = null, to = null) {
+//    var matchPattern = /[0-9]+/;
+//    if (curHtml.includes("$")) {
+//        var splitCurHtml = curHtml.split("$");
+//        if (matchPattern.test(splitCurHtml[splitCurHtml.length - 1])) {
+//            curHtml = splitCurHtml[0] + curHtml.substring(curHtml.indexOf("."));
+//        }
+//    }
     var curHtmlPath = parent.path + curHtml;
     var eSrcCodeText = parent.srcCodeFrame.document.getElementById("srcCodeText");
 
@@ -103,9 +110,15 @@ function changeHighlighted(from, to) {
         curSrcCodeText = eSrcCodeText.contentDocument.querySelector('#' + parent.curClassName);
     } else {
         tempClassName = (parent.curClassName).split("$");
-        curSrcCodeText =
-            eSrcCodeText.contentDocument.querySelector('#' + tempClassName[tempClassName.length - 1]);
-        regex = /^(\s*:)|(\s{12,}})$|@Override/g;
+        var matchPattern = /^[0-9]+$/;
+        if (matchPattern.test(tempClassName[tempClassName.length - 1])) {
+            curSrcCodeText =
+                eSrcCodeText.contentDocument.getElementById(parent.curClassName);
+        } else {
+            curSrcCodeText =
+                eSrcCodeText.contentDocument.querySelector('#' + tempClassName[tempClassName.length - 1]);
+            regex = /^(\s*:)|(\s{12,}})$|@Override/g;
+        }
     }
     var td_code = curSrcCodeText.children[0].children[1].children[0].children[0].children[1].children[0].children;
     var td_gutter = curSrcCodeText.children[0].children[1].children[0].children[0].children[0].children;
