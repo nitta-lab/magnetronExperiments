@@ -186,17 +186,6 @@
                                 "children": null
                             }
                         }, {
-                            "callFrom": "136",
-                            "callee": {
-                                "html": "EventImpl.html",
-                                "signature": "public EventRequest request()",
-                                "firstLine": "188",
-                                "lastLine": "188",
-                                "parents": null,
-                                "actualClass": "BreakpointEventImpl",
-                                "children": null
-                            }
-                        }, {
                             "callFrom": "155",
                             "callee": {
                                 "html": "JavaBreakpoint.html",

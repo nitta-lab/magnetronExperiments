@@ -33,7 +33,7 @@ public class EventDispatcher implements Runnable {
 			:
 			Event event= iter.nextEvent();
 			:
-			IJDIEventListener listener = (IJDIEventListener)fEventHandlers.get(event.request());
+			IJDIEventListener listener = (IJDIEventListener)fEventHandlers.get(event.request()); // (event.request()の先の呼び出しは課題から外れるため省略)
             :
 			if (listener != null) {
 				:
