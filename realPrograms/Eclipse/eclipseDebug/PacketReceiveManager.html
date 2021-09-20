@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="PacketReceiveManager">
+package org.eclipse.jdi.internal.connect;
+:
+public class PacketReceiveManager extends PacketManager {
+    :
+	private LinkedList fCommandPackets;
+    :
+    public JdwpCommandPacket getCommand(int command, long timeToWait) throws InterruptedException {
+		JdwpCommandPacket packet = null;
+		synchronized (fCommandPackets) {
+            :
+			while (... &amp;&amp; (packet = removeCommandPacket(command)) == null &amp;&amp; ...) {
+                :
+			}
+		}
+        :
+		return packet;
+	}
+    :
+	private JdwpCommandPacket removeCommandPacket(int command) {
+		ListIterator iter = fCommandPackets.listIterator();
+		while (iter.hasNext()) {
+			JdwpCommandPacket packet = (JdwpCommandPacket) iter.next();
+			if (packet.getCommand() == command) { // (packet.getCommand()の先の呼び出しは課題から外れるため省略)
+                :
+				return packet;
+			}
+		}
+		return null;
+	}
+    :
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="PacketReceiveManager";
+        var lineNumPair = [
+            [1, 11],
+            [3, 34],
+            [5, 43],
+            [7, 93],
+            [11, 101],
+            [13, 106],
+            [16, 129],
+            [19, 199],
+            [25, 205],
+            [31, 282]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="EventQueueImpl">
+package org.eclipse.jdi.internal.event;
+:
+public class EventQueueImpl extends MirrorImpl implements EventQueue {
+    :
+    public EventSet remove(long timeout) throws InterruptedException {
+        :
+        EventSetImpl set;
+        do {
+            JdwpCommandPacket packet = getCommandVM(JdwpCommandPacket.E_COMPOSITE, timeout);
+            :
+            set = EventSetImpl.read(this, packet.dataInStream()); // (packet.dataInStream()の先の呼び出しは課題から外れるため省略)
+            :
+        } while (set.isEmpty()); // (set.isEmpty()の先の呼び出しは課題から外れるため省略)
+        return set;
+        :
+	}
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="EventQueueImpl";
+        var lineNumPair = [
+            [1, 11],
+            [3, 33],
+            [5, 54],
+            [7, 61],
+            [11, 65],
+            [13, 67],
+            [16, 87]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

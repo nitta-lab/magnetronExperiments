@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="JavaBreakpoint">
+package org.eclipse.jdt.internal.debug.core.breakpoints;
+:
+public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoint, IJDIEventListener, IDebugEventSetListener {
+	:
+	public boolean handleEvent(Event event, JDIDebugTarget target, boolean suspendVote, EventSet eventSet) {
+        :
+        JDIThread thread= ...; // (課題から外れるため省略)
+		:
+		return handleBreakpointEvent(event, thread, suspendVote);
+	}
+	:
+ 	public boolean handleBreakpointEvent(Event event, JDIThread thread, boolean suspendVote) {
+		:
+        return ...; // Resume if suspend fails (課題から外れるため省略)
+	}
+	:
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="JavaBreakpoint";
+        var lineNumPair = [
+            [1, 11],
+            [3, 61],
+            [5, 269],
+            [7, 274],
+            [9, 288],
+            [12, 349],
+            [14, 351],
+            [17, 1295]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

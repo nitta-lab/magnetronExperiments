@@ -1,4 +1,4 @@
-var title = ["実験課題1", "ArgoUML 図形削除機能", "ArgoUML 図形選択機能", "JHotDraw 図形移動機能", "JHotDraw 図形選択機能"];
+var title = ["実験課題1", "ArgoUML 図形削除機能", "ArgoUML 図形選択機能", "JHotDraw 図形移動機能", "JHotDraw 図形選択機能", "Eclipse デバッグ機能"];
 var titleToJson = new Map([[title[0], "../toyPrograms/pre_Exp7/pre_Exp7.json"],
                            [title[1],
                             "../realPrograms/ArgoUML/actionRemoveFromDiagram/actionRemoveFromDiagram.json"],
@@ -7,10 +7,13 @@ var titleToJson = new Map([[title[0], "../toyPrograms/pre_Exp7/pre_Exp7.json"],
                            [title[3],
                             "../realPrograms/JHotDraw/defaultDragTracker/defaultDragTracker.json"],
                            [title[4],
-                            "../realPrograms/JHotDraw/selectionTool/selectionTool.json"]
-                          ]);
-var key = title[2]; //Change here!
+                            "../realPrograms/JHotDraw/selectionTool/selectionTool.json"],
+                          [title[5],
+                            "../realPrograms/Eclipse/eclipseDebug/eclipseDebug.json"]
+                         ]);
+var key = title[5]; //Change here!
 var root;
+var rootIndex;
 var stack = [{
     "num": "0",
     "line": "0"
@@ -49,6 +52,7 @@ function getParam(name, url) {
 }
 
 function init_globals() {
+    console.log("-----init_globals()-----")
     if (stack.length > 1) {
         while (stack.length > 1) {
             stack.pop();
@@ -60,12 +64,13 @@ function init_globals() {
         }
     }
 
-    stack[0].line = root.firstLine;
-    curRoot = root;
+    rootIndex = 0;
+    stack[0].line = root[rootIndex].firstLine;
+    curRoot = root[rootIndex];
     setPath(titleToJson.get(key));
 
     // curHtml, curClassName変更
-    setCurHtml(root.html);
+    setCurHtml(root[rootIndex].html);
 }
 
 function setCurHtml(htmlPath) {

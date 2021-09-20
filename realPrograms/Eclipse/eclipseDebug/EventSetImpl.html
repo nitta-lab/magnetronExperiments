@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="EventSetImpl">
+package org.eclipse.jdi.internal.event;
+:
+public class EventSetImpl extends MirrorImpl implements EventSet {
+
+    private List fEvents;
+    :
+    public EventIterator eventIterator() {
+        return new EventIteratorImpl(fEvents.listIterator());
+    }
+    :
+	public static EventSetImpl read(MirrorImpl target, DataInputStream in) throws IOException {
+		VirtualMachineImpl vmImpl = ...; // (課題から外れるため省略)
+		EventSetImpl eventSet = new EventSetImpl(vmImpl); //  (new EventSetImpl(vmImpl)の先の呼び出しは課題から外れるため省略)
+        :
+        eventSet.fEvents = ...; // (課題から外れるため省略)
+
+		while (...) {
+			EventImpl event = EventImpl.read(target, in);
+            :
+			if (...)
+				eventSet.fEvents.add(event);
+
+        }
+        return eventSet;
+    }
+    :
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="EventSetImpl";
+        var lineNumPair = [
+            [1, 11],
+            [3, 37],
+            [7, 72],
+            [11, 147],
+            [15, 156],
+            [20, 169],
+            [27, 286]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

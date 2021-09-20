@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="EventDispatcher$1">
+package org.eclipse.jdt.internal.debug.core;
+:
+public class EventDispatcher implements Runnable {
+    :
+    private JDIDebugTarget fTarget;
+	:
+	private void dispatch(EventSet eventSet) {
+		:
+		EventIterator iter= eventSet.eventIterator();
+		:
+        boolean resume = true;
+        :
+		while (iter.hasNext()) { // (iter.hasNext()の先の呼び出しは課題から外れるため省略)
+			:
+			Event event= iter.nextEvent();
+			:
+			IJDIEventListener listener = (IJDIEventListener)fEventHandlers.get(event.request()); // (event.request()の先の呼び出しは課題から外れるため省略)
+            :
+			if (listener != null) {
+				:
+				resume = listener.handleEvent(event, fTarget, !resume, eventSet) &amp;&amp; resume;
+				:
+			}
+            :
+		}
+        :
+	}
+    :
+	public void run() {
+		VirtualMachine vm = fTarget.getVM();
+		if (vm != null) {
+			EventQueue q= vm.eventQueue();
+			EventSet eventSet= null;
+			while (...) {
+                :
+                eventSet= q.remove(1000);
+                :
+                if(... &amp;&amp; eventSet != null) {
+                    final EventSet set = eventSet;
+                    Job job = new Job("JDI Event Dispatch") { //$NON-NLS-1$
+                        protected IStatus run(IProgressMonitor monitor) {
+                            dispatch(set);
+                            return ...;
+                        }
+                    :
+                    };
+                    :
+                    job.schedule(); // (job.schedule()の先の呼び出しの一部は課題から外れるため省略)
+                }
+                :
+			}
+		}
+	}
+    :
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="EventDispatcher$1";
+        var lineNumPair = [
+            [1, 11],
+            [3, 63],
+            [5, 67],
+            [7, 104],
+            [9, 119],
+            [11, 122],
+            [13, 126],
+            [15, 131],
+            [17, 136],
+            [19, 138],
+            [21, 155],
+            [23, 158],
+            [25, 172],
+            [27, 223],
+            [29, 232],
+            [36, 241],
+            [38, 246],
+            [46, 269],
+            [48, 271],
+            [51, 276],
+            [55, 364]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

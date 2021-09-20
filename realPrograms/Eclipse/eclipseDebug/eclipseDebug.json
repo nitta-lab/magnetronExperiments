@@ -1,0 +1,216 @@
+{
+    "root": [{
+        "html": "EventDispatcher.html",
+        "signature": "public void run()",
+        "firstLine": "233",
+        "lastLine": "248",
+        "parents": null,
+        "actualClass": null,
+        "children": [{
+            "callFrom": "233",
+            "callee": {
+                "html": "JDIDebugTarget.html",
+                "signature": "public VirtualMachine getVM()",
+                "firstLine": "737",
+                "lastLine": "737",
+                "parents": null,
+                "actualClass": null,
+                "children": null
+            }
+        }, {
+            "callFrom": "235",
+            "callee": {
+                "html": "VirtualMachineImpl.html",
+                "signature": "public EventQueue eventQueue()",
+                "firstLine": "648",
+                "lastLine": "648",
+                "parents": null,
+                "actualClass": null,
+                "children": null
+            }
+        }, {
+            "callFrom": "241",
+            "callee": {
+                "html": "EventQueueImpl.html",
+                "signature": "public EventSet remove(long)",
+                "firstLine": "63",
+                "lastLine": "68",
+                "parents": [{
+                    "html": "MirrorImpl.html"
+                }],
+                "actualClass": null,
+                "children": [{
+                    "callFrom": "63",
+                    "callee": {
+                        "html": "MirrorImpl.html",
+                        "signature": "public final JdwpCommandPacket getCommandVM(int, long)",
+                        "firstLine": "277",
+                        "lastLine": "277",
+                        "parents": null,
+                        "actualClass": "EventQueueImpl",
+                        "children": [{
+                            "callFrom": "277",
+                            "callee": {
+                                "html": "VirtualMachineImpl.html",
+                                "signature": "public final PacketReceiveManager packetReceiveManager()",
+                                "firstLine": "318",
+                                "lastLine": "318",
+                                "parents": [{
+                                    "html": "MirrorImpl.html"
+                                }],
+                                "actualClass": null,
+                                "children": null
+                            }
+                        }, {
+                            "callFrom": "277",
+                            "callee": {
+                                "html": "PacketReceiveManager.html",
+                                "signature": "public JdwpCommandPacket getCommand(int, long)",
+                                "firstLine": "94",
+                                "lastLine": "129",
+                                "parents": null,
+                                "actualClass": null,
+                                "children": [{
+                                    "callFrom": "101",
+                                    "callee": {
+                                        "html": "PacketReceiveManager.html",
+                                        "signature": "private JdwpCommandPacket removeCommandPacket(int)",
+                                        "firstLine": "200",
+                                        "lastLine": "205",
+                                        "parents": null,
+                                        "actualClass": null,
+                                        "children": null
+                                    }
+                                }]
+                            }
+                        }]
+                    }
+                }, {
+                    "callFrom": "65",
+                    "callee": {
+                        "html": "EventSetImpl.html",
+                        "signature": "public static EventSetImpl read(MirrorImpl, DataInputStream)",
+                        "firstLine": "148",
+                        "lastLine": "173",
+                        "parents": [{
+                            "html": "MirrorImpl.html"
+                        }],
+                        "actualClass": null,
+                        "children": [{
+                            "callFrom": "159",
+                            "callee": {
+                                "html": "EventImpl.html",
+                                "signature": "public static EventImpl read(MirrorImpl, DataInputStream)",
+                                "firstLine": "108",
+                                "lastLine": "181",
+                                "parents": [{
+                                    "html": "MirrorImpl.html"
+                                }],
+                                "actualClass": null,
+                                "children": [{
+                                    "callFrom": "120",
+                                    "callee": {
+                                        "html": "BreakpointEventImpl.html",
+                                        "signature": "public static BreakpointEventImpl read(MirrorImpl, RequestID, DataInputStream)",
+                                        "firstLine": "45",
+                                        "lastLine": "49",
+                                        "parents": [{
+                                            "html": "LocatableEventImpl.html"
+                                        }],
+                                        "actualClass": null,
+                                        "children": null
+                                    }
+                                }]
+                            }
+                        }]
+                    }
+                }]
+            }
+        }]
+    }, {
+        "html": "EventDispatcher.html",
+        "signature": "public void run()",
+        "firstLine": "271",
+        "lastLine": "271",
+        "parents": null,
+        "actualClass": null,
+        "children": [{
+            "callFrom": "271",
+            "callee": {
+                "html": "EventDispatcher$1.html",
+                "signature": "protected IStatus run(IProgressMonitor)",
+                "firstLine": "250",
+                "lastLine": "251",
+                "parents": null,
+                "actualClass": null,
+                "children": [{
+                    "callFrom": "250",
+                    "callee": {
+                        "html": "EventDispatcher.html",
+                        "signature": "private void dispatch(EventSet)",
+                        "firstLine": "104",
+                        "lastLine": "172",
+                        "parents": null,
+                        "actualClass": null,
+                        "children": [{
+                            "callFrom": "119",
+                            "callee": {
+                                "html": "EventSetImpl.html",
+                                "signature": "public EventIterator eventIterator()",
+                                "firstLine": "73",
+                                "lastLine": "73",
+                                "parents": null,
+                                "actualClass": null,
+                                "children": [{
+                                    "callFrom": "73",
+                                    "callee": {
+                                        "html": "EventIteratorImpl.html",
+                                        "signature": " public EventIteratorImpl(ListIterator)",
+                                        "firstLine": "32",
+                                        "lastLine": "34",
+                                        "parents": null,
+                                        "actualClass": null,
+                                        "children": null
+                                    }
+                                }]
+                            }
+                        }, {
+                            "callFrom": "131",
+                            "callee": {
+                                "html": "EventIteratorImpl.html",
+                                "signature": "public Event nextEvent()",
+                                "firstLine": "40",
+                                "lastLine": "40",
+                                "parents": null,
+                                "actualClass": null,
+                                "children": null
+                            }
+                        }, {
+                            "callFrom": "155",
+                            "callee": {
+                                "html": "JavaBreakpoint.html",
+                                "signature": "public boolean handleEvent(Event, JDIDebugTarget, boolean, EventSet)",
+                                "firstLine": "288",
+                                "lastLine": "288",
+                                "parents": null,
+                                "actualClass": "JavaLineBreakpoint",
+                                "children": [{
+                                    "callFrom": "288",
+                                    "callee": {
+                                        "html": "JavaBreakpoint.html",
+                                        "signature": "public boolean handleBreakpointEvent(Event, JDIThread, boolean)",
+                                        "firstLine": "351",
+                                        "lastLine": "351",
+                                        "parents": null,
+                                        "actualClass": "JavaLineBreakpoint",
+                                        "children": null
+                                    }
+                                }]
+                            }
+                        }]
+                    }
+                }]
+            }
+        }]
+    }]
+}

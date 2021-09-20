@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="JdwpPacket">
+public abstract class JdwpPacket {
+    :
+    protected byte[] fDataBuf = null;
+    :
+    public DataInputStream dataInStream() {
+		if (fDataBuf != null) {
+			return new DataInputStream(new ByteArrayInputStream(fDataBuf));
+		}
+        :
+	}
+    :
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="JdwpPacket";
+        var lineNumPair = [
+            [1, 25],
+            [3, 36],
+            [5, 90],
+            [10, 95],
+            [12, 239]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>

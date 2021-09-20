@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="EventImpl">
+package org.eclipse.jdi.internal.event;
+:
+public abstract class EventImpl extends MirrorImpl implements Event {
+    :
+	public static EventImpl read(MirrorImpl target, DataInputStream dataInStream) throws IOException {
+		byte eventKind = ...; //$NON-NLS-1$ (課題から外れるため省略)
+        RequestID requestID = ...; // (課題から外れるため省略)
+        :
+		EventImpl result;
+		switch(eventKind) {
+            :
+			case BreakpointEventImpl.EVENT_KIND:
+				result = BreakpointEventImpl.read(target, requestID, dataInStream);
+				break;
+            :
+ 		}
+        :
+		return result;
+	}
+    :
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="EventImpl";
+        var lineNumPair = [
+            [1, 11],
+            [3, 35],
+            [5, 107],
+            [9, 112],
+            [12, 119],
+            [16, 175],
+            [18, 181],
+            [21, 230]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>
