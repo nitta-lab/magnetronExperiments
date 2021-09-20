@@ -22,8 +22,8 @@ package org.eclipse.jdi.internal.event;
 public class BreakpointEventImpl extends LocatableEventImpl implements BreakpointEvent {
     :
     public static BreakpointEventImpl read(MirrorImpl target, RequestID requestID, DataInputStream dataInStream) throws IOException {
-        :
-		BreakpointEventImpl event = new BreakpointEventImpl(vmImpl, requestID);
+        VirtualMachineImpl vmImpl = ...; // (課題から外れるため省略)
+		BreakpointEventImpl event = new BreakpointEventImpl(vmImpl, requestID); //  (new BreakpointEventImpl(vmImpl, requestID)の先の呼び出しは課題から外れるため省略)
         :
 		return event;
  	}
@@ -36,7 +36,6 @@ public class BreakpointEventImpl extends LocatableEventImpl implements Breakpoin
             [1, 11],
             [3, 30],
             [5, 44],
-            [7, 46],
             [9, 49],];
         changeLineNum(lineNumPair, id);
     }

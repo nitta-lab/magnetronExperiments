@@ -28,7 +28,7 @@ public class EventQueueImpl extends MirrorImpl implements EventQueue {
             JdwpCommandPacket packet = getCommandVM(JdwpCommandPacket.E_COMPOSITE, timeout);
             :
             set = EventSetImpl.read(this, packet.dataInStream()); // (packet.dataInStream()の先の呼び出しは課題から外れるため省略)
-            handledJdwpEventSet();
+            :
         } while (set.isEmpty()); // (set.isEmpty()の先の呼び出しは課題から外れるため省略)
         return set;
         :
@@ -44,6 +44,7 @@ public class EventQueueImpl extends MirrorImpl implements EventQueue {
             [5, 54],
             [7, 61],
             [11, 65],
+            [13, 67],
             [16, 87]];
         changeLineNum(lineNumPair, id);
     }

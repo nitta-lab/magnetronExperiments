@@ -1,9 +1,9 @@
 {
-    "root": {
+    "root": [{
         "html": "DefaultDragTracker.html",
         "signature": "public void mousePressed(MouseEvent)",
         "firstLine": "97",
-        "lastLine": "159",
+        "lastLine": "132",
         "parents": [{
             "html": "AbstractTool.html"
         }],
@@ -42,5 +42,15 @@
                 "children": null
             }
         }]
-    }
+    }, {
+        "html": "DefaultDragTracker.html",
+        "signature": "public void mouseDragged(MouseEvent)",
+        "firstLine": "137",
+        "lastLine": "159",
+        "parents": [{
+            "html": "AbstractTool.html"
+        }],
+        "actualClass": null,
+        "children": null
+    }]
 }

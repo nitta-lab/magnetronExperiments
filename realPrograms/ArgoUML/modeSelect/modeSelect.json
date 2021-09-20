@@ -1,5 +1,5 @@
 {
-    "root": {
+    "root": [{
         "html": "ModeSelect.html",
         "signature": "public void mousePressed(MouseEvent)",
         "firstLine": "151",
@@ -238,5 +238,5 @@
                 }]
             }
         }]
-    }
+    }]
 }

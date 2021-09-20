@@ -29,7 +29,7 @@ public class EventDispatcher implements Runnable {
 		:
         boolean resume = true;
         :
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { // (iter.hasNext()の先の呼び出しは課題から外れるため省略)
 			:
 			Event event= iter.nextEvent();
 			:
@@ -59,7 +59,7 @@ public class EventDispatcher implements Runnable {
                     Job job = new Job("JDI Event Dispatch") { //$NON-NLS-1$
                         protected IStatus run(IProgressMonitor monitor) {
                             dispatch(set);
-                            :
+                            return ...;
                         }
                     :
                     };
@@ -94,7 +94,6 @@ public class EventDispatcher implements Runnable {
             [29, 232],
             [36, 241],
             [38, 246],
-            [44, 252],
             [46, 269],
             [48, 271],
             [51, 276],

@@ -28,10 +28,10 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
     }
     :
 	public static EventSetImpl read(MirrorImpl target, DataInputStream in) throws IOException {
-		VirtualMachineImpl vmImpl = target.virtualMachineImpl();
-		EventSetImpl eventSet = new EventSetImpl(vmImpl);
+		VirtualMachineImpl vmImpl = ...; // (課題から外れるため省略)
+		EventSetImpl eventSet = new EventSetImpl(vmImpl); //  (new EventSetImpl(vmImpl)の先の呼び出しは課題から外れるため省略)
         :
-        eventSet.fEvents = ...;
+        eventSet.fEvents = ...; // (課題から外れるため省略)
 
 		while (...) {
 			EventImpl event = EventImpl.read(target, in);

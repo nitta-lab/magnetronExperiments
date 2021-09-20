@@ -1,9 +1,9 @@
 {
-    "root": {
+    "root": [{
         "html": "EventDispatcher.html",
         "signature": "public void run()",
         "firstLine": "233",
-        "lastLine": "277",
+        "lastLine": "248",
         "parents": null,
         "actualClass": null,
         "children": [{
@@ -24,9 +24,7 @@
                 "signature": "public EventQueue eventQueue()",
                 "firstLine": "648",
                 "lastLine": "648",
-                "parents": [{
-                    "html": "MirrorImpl.html"
-                }],
+                "parents": null,
                 "actualClass": null,
                 "children": null
             }
@@ -68,8 +66,8 @@
                             "callee": {
                                 "html": "PacketReceiveManager.html",
                                 "signature": "public JdwpCommandPacket getCommand(int, long)",
-                                "firstLine": 94,
-                                "lastLine": 129,
+                                "firstLine": "94",
+                                "lastLine": "129",
                                 "parents": null,
                                 "actualClass": null,
                                 "children": [{
@@ -114,7 +112,7 @@
                                     "callee": {
                                         "html": "BreakpointEventImpl.html",
                                         "signature": "public static BreakpointEventImpl read(MirrorImpl, RequestID, DataInputStream)",
-                                        "firstLine": "46",
+                                        "firstLine": "45",
                                         "lastLine": "49",
                                         "parents": [{
                                             "html": "LocatableEventImpl.html"
@@ -128,13 +126,21 @@
                     }
                 }]
             }
-        }, {
+        }]
+    }, {
+        "html": "EventDispatcher.html",
+        "signature": "public void run()",
+        "firstLine": "271",
+        "lastLine": "271",
+        "parents": null,
+        "actualClass": null,
+        "children": [{
             "callFrom": "271",
             "callee": {
                 "html": "EventDispatcher$1.html",
                 "signature": "protected IStatus run(IProgressMonitor)",
                 "firstLine": "250",
-                "lastLine": "250",
+                "lastLine": "251",
                 "parents": null,
                 "actualClass": null,
                 "children": [{
@@ -147,6 +153,50 @@
                         "parents": null,
                         "actualClass": null,
                         "children": [{
+                            "callFrom": "119",
+                            "callee": {
+                                "html": "EventSetImpl.html",
+                                "signature": "public EventIterator eventIterator()",
+                                "firstLine": "73",
+                                "lastLine": "73",
+                                "parents": null,
+                                "actualClass": null,
+                                "children": [{
+                                    "callFrom": "73",
+                                    "callee": {
+                                        "html": "EventIteratorImpl.html",
+                                        "signature": " public EventIteratorImpl(ListIterator)",
+                                        "firstLine": "32",
+                                        "lastLine": "34",
+                                        "parents": null,
+                                        "actualClass": null,
+                                        "children": null
+                                    }
+                                }]
+                            }
+                        }, {
+                            "callFrom": "131",
+                            "callee": {
+                                "html": "EventIteratorImpl.html",
+                                "signature": "public Event nextEvent()",
+                                "firstLine": "40",
+                                "lastLine": "40",
+                                "parents": null,
+                                "actualClass": null,
+                                "children": null
+                            }
+                        }, {
+                            "callFrom": "136",
+                            "callee": {
+                                "html": "EventImpl.html",
+                                "signature": "public EventRequest request()",
+                                "firstLine": "188",
+                                "lastLine": "188",
+                                "parents": null,
+                                "actualClass": "BreakpointEventImpl",
+                                "children": null
+                            }
+                        }, {
                             "callFrom": "155",
                             "callee": {
                                 "html": "JavaBreakpoint.html",
@@ -173,5 +223,5 @@
                 }]
             }
         }]
-    }
+    }]
 }

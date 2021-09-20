@@ -39,7 +39,7 @@ public class PacketReceiveManager extends PacketManager {
 		ListIterator iter = fCommandPackets.listIterator();
 		while (iter.hasNext()) {
 			JdwpCommandPacket packet = (JdwpCommandPacket) iter.next();
-			if (packet.getCommand() == command) {
+			if (packet.getCommand() == command) { // (packet.getCommand()の先の呼び出しは課題から外れるため省略)
                 :
 				return packet;
 			}

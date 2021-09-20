@@ -22,12 +22,15 @@ package org.eclipse.jdt.internal.debug.core.breakpoints;
 public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoint, IJDIEventListener, IDebugEventSetListener {
 	:
 	public boolean handleEvent(Event event, JDIDebugTarget target, boolean suspendVote, EventSet eventSet) {
+        :
+        JDIThread thread= ...; // (課題から外れるため省略)
 		:
 		return handleBreakpointEvent(event, thread, suspendVote);
 	}
 	:
  	public boolean handleBreakpointEvent(Event event, JDIThread thread, boolean suspendVote) {
 		:
+        return ...; // Resume if suspend fails (課題から外れるため省略)
 	}
 	:
 }
@@ -39,10 +42,11 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
             [1, 11],
             [3, 61],
             [5, 269],
-            [7, 288],
-            [10, 349],
-            [12, 351],
-            [14, 1295]];
+            [7, 274],
+            [9, 288],
+            [12, 349],
+            [14, 351],
+            [17, 1295]];
         changeLineNum(lineNumPair, id);
     }
 </script>
