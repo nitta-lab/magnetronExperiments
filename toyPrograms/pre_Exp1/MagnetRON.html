@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>小課題1のアニメーション</title>
+    <title>小課題1のマグネトロンによる表現</title>
     <meta charset="UTF-8">
     <script type="text/javascript">
         function init(param) {
@@ -10,8 +10,8 @@
                 var t = getParam('title', param);
                 if (t) title = t;
             }
-            document.title = title + "のアニメーション";
-            document.getElementById("title2").innerText = title + "のアニメーション";
+            document.title = title + "のマグネトロンによる表現";
+            document.getElementById("title2").innerText = title + "のマグネトロンによる表現";
             var desc= document.getElementById("description");
             desc.innerText = title + "の" + desc.innerText;
         }
@@ -27,10 +27,10 @@
     </script>
 </head>
 <body onLoad="init(location.search)">
-<h1 id="title2">小課題1のアニメーション</h1>
+<h1 id="title2">小課題1のマグネトロンによる表現</h1>
 
-<p id="description">プログラム実行時のオブジェクトの動きを，アニメーション化したものを専用のアプリケーション(マグネトロンビューア)で見ていただきます．<br>
-アニメーションは何度再生していただいても構いません．可能な限り，ソースコードと照らし合わせながら見るようにしてください．時間の目安は5分程度です．
+<p id="description">マグネトロンで可視化したものを専用のアプリケーション(マグネトロンビューア)で見ていただきます．<br>
+アニメーションは何度再生していただいても構いません．必ずソースコードと照らし合わせながら見るようにしてください．時間の目安は5分程度です．
 </p>
 <p>
 マグネトロンビューアはリモートデスクトップ上にインストールしております．<br>
@@ -40,12 +40,10 @@
 開くファイル: C:\Users\userXX\Desktop\traces\<font color="red">TinyProblemA1_B1_C1_D1.magnet</font><br>
 抽出する機能: 小課題A1/B1/C1/D1
 </div>
-マグネトロンビューアでは，円はオブジェクトを，円の内部の矩形はメソッドの実行を表し，円の内部にクラス名を，矩形の内部にメソッド名を記します．<br>
-円の間の実線矢印はフィールドによる参照，破線矢印はオブジェクトの生成を，矩形の間の緑色の破線矢印はメソッド呼び出しを表します．<br>
-また，赤い実線矢印は，その参照がこのプログラムの実行中に生成されたことを示します．<br>
-なお，あるクラスのクラスメソッド(staticメソッド)が呼び出された場合，そのクラス自体は矩形で表されます．<br>
-メソッド内で仮引数や局所変数によって参照されているオブジェクトは，メソッド実行を表す矩形に接する形で配置され，引数や戻り値による受け渡しに応じて，オブジェクトが移動します．
 </p>
+
+マグネトロンの詳細は<a href="../../visualization/MagnetRON.html" target="_blank">こちら</a>をご覧ください．<br>
+<img src="../../visualization/pictures/MagnetRONNote.png" alt="マグネトロンの凡例"><br>
 
 <a href="#" onClick="window.close();">閉じる</a>
 </body>
