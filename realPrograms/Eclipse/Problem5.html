@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<title>課題5</title>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" href="sample.css">-->
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript" src="../../debugger-like/lineNum.js"></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+
+    <script type="text/javascript">
+        function setLineNum() {
+            var id="EventDispatcher";
+            var lineNumPair = [
+                [1, 11],
+                [3, 63],
+                [5, 67],
+                [7, 232],
+                [14,241],
+                [16,246],
+                [24,269],
+                [26,271],
+                [29,276],
+                [33,364]];
+            changeLineNum(lineNumPair, id);
+            id="JavaBreakpoint";
+            lineNumPair = [
+                [1, 11],
+                [3, 62],
+                [5, 349],
+                [7, 351],
+                [10, 1295]];
+            changeLineNum(lineNumPair, id);
+        }
+    </script>
+</head>
+
+<body onLoad="setLineNum()">
+<h1>課題5</h1>
+
+<p>
+課題5では，Eclipseのデバッグ機能について見ていきます．
+Eclipseでは，デバッグ実行時にブレークポイントを配置した行に来たとき，プログラムが一時停止します．<br>
+この課題では，
+
+<blockquote>
+    <strong>「プログラムがブレークポイントを配置した行に到達したとき，そのイベントがどのようにして検出され，どのようにして処理されるか?」</strong>
+</blockquote>
+
+を理解することを目的とします．<br>
+まず，デバッグ機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
+デバッグ実行を開始すると，<code>EventDispatcher</code> クラスの <code>run()</code> メソッド(以下，<code>EventDispatcher#run()</code> のように書く)が呼び出されます．
+その後，241行目から <code>q.remove(1000)</code> が呼び出され，実行がブレークポイントに到達すると，ブレークポイントに到達したことを示すイベントが返されます．
+今回の実行では，ローカル変数 <code>eventSet</code> に実際に代入されるのは，<code>EventSetImpl</code> クラスのインスタンスへの参照です．
+ここで，<code>EventSetImpl</code> クラスはデバッグ実行時に発生したイベントの集合を保持するためのクラスで，今回の場合はブレークポイントに到達したことを示すイベント(<code>BreakpointEventImpl</code>)のみが保持されています．
+その後，271行目から <code>job.schedule()</code> が呼び出され，Eclipseのジョブ管理システムを経由して，
+<code>EventDispatcher</code> 内の無名クラス <code>EventDispatcher$1</code> (248～269行目)の <code>run()</code> メソッド(249行目)が呼び出されます．
+</p>
+
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<pre class="brush:java;" id="EventDispatcher">
+package org.eclipse.jdt.internal.debug.core;
+:
+public class EventDispatcher implements Runnable {
+    :
+    private JDIDebugTarget fTarget;
+	:
+	public void run() {
+		VirtualMachine vm = fTarget.getVM();
+		if (vm != null) {
+			EventQueue q= vm.eventQueue();
+			EventSet eventSet= null;
+			while (...) {
+                :
+                eventSet= q.remove(1000);
+                :
+                if(... &amp;&amp; eventSet != null) {
+                    final EventSet set = eventSet;
+                    Job job = new Job("JDI Event Dispatch") { //$NON-NLS-1$
+                        protected IStatus run(IProgressMonitor monitor) {
+                            dispatch(set);
+                            return ...;
+                        }
+                    :
+                    };
+                    :
+                    job.schedule(); // (job.schedule()の先の呼び出しの一部は課題から外れるため省略)
+                }
+                :
+			}
+		}
+	}
+    :
+}
+</pre>
+</div>
+
+<p>
+250行目の<code>dispatch(set)</code> の呼び出し先では，最終的に以下の <code>JavaBreakpoint#handleBreakpointEvent()</code> が呼び出され，
+引数 <code>event</code> で <code>BreakpointEventImpl</code> クラスのインスタンスへの参照を受け取り，ブレークポイントに到達したときの処理が実行されます．
+</p>
+
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<pre class="brush:java;" id="JavaBreakpoint">
+package org.eclipse.jdt.internal.debug.core.breakpoints;
+:
+public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoint, IJDIEventListener, IDebugEventSetListener {
+	:
+ 	public boolean handleBreakpointEvent(Event event, JDIThread thread, boolean suspendVote) {
+		:
+        return ...; // Resume if suspend fails (課題から外れるため省略)
+	}
+	:
+}
+</pre>
+</div>
+
+<p>
+下記のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
+まず，このソースコードを最初から最後まで飛ばさずに追いかけて，ソースコードの全体の流れを把握してください．
+</p>
+
+<blockquote>
+    <p><a href="../../debugger-like/debugger.html?key=5" target="_blank">Eclipseのデバッグ機能で実行されるソースコード（一部）</a></p>
+</blockquote>
+
+<p>
+このソースコードについて以下のアンケートにお答えください．
+</p>
+
+<blockquote>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSebcdiZzLsuBLcFVqE-cP3AWUESPv2Iw0DalDPh9R7h6N27Yw/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+</blockquote>
+
+<hr size="5">
+
+<h1>課題5の可視化</h1>
+
+<p>
+課題5について，オブジェクト図に呼び出し木を埋め込んだ表記法による表現とオブジェクトの動きを表すアニメーションによる可視化を見比べて頂きます．<br>
+</p>
+
+<p>
+まずは，以下の<strong>オブジェクト図に呼び出し木を埋め込んだ表記法</strong>(内容についてはリンク先で説明)による表現をご覧ください．
+</p>
+
+<blockquote>
+    <a href="../realPrograms/JHotDraw/selectionTool/ObjCallDiagram.html?title=課題A4&subject=図面に配置された図形(RectangleFigureオブジェクト)の選択" target="_blank">課題5のオブジェクト図と呼び出し木による表現</a>
+</blockquote>
+
+<p>
+次に以下の<strong>オブジェクトの動きを表すアニメーション</strong>(内容についてはリンク先で説明)による可視化をご覧ください．
+</p>
+
+<blockquote>
+    <a href="../realPrograms/JHotDraw/selectionTool/MagnetRON.html?title=課題A4&subject=図面に配置された図形(RectangleFigureオブジェクト)の選択" target="_blank">課題5のアニメーションによる可視化</a>
+</blockquote>
+
+<p>
+これらの表現とソースコードの内容を見比べながら，以下のアンケートにお答えください．
+</p>
+
+<blockquote>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4m52P3fNOwNDummO0BXKt_A84tS-76KI8uC-2GGuZVUipMA/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+</blockquote>
+
+<p style="margin-bottom:2em;"></p>
+<a href="../Closing.html">次へ</a>
+</body>
