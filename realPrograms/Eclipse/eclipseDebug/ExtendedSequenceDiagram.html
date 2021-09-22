@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Eclipseのデバッグ機能の拡張シーケンス図による表現</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+        function init(param) {
+            var title = "Eclipseのデバッグ機能";
+            var subject = "ブレークポイントイベントの検出";
+            if (param) {
+                var t = getParam('title', param);
+                if (t) title = t;
+                var s = getParam('subject', param);
+                if (s) subject = s;
+            }
+            document.title = title + "(" + subject + ")" + "拡張シーケンス図による表現";
+            document.getElementById("title2").innerText = title + "(" + subject + ")" + "の拡張シーケンス図による表現";
+            var desc= document.getElementById("description");
+            desc.innerText = title + "の" + subject + "に関係するプログラムの動作の，" + desc.innerText;
+        }
+
+        function getParam(name, url) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+    <style type="text/css">
+        img.objcall { zoom: 0.75; }
+    </style>
+</head>
+<body onLoad="init(location.search)">
+<h1 id="title2">Eclipseのデバッグ機能の拡張シーケンス図による表現</h1>
+
+<p id="description">
+    拡張シーケンス図による可視化です．<br>
+    必ずソースコードと照らし合わせながら見るようにしてください．時間の目安は15分程度です．
+</p>
+拡張シーケンス図の詳細は<a href="../../../visualization/ExtendedSequenceDiagram.html" target="_blank">こちら</a>をご覧ください．<br>
+
+<img src="../../../visualization/pictures/ExtendedSequenceDiagramNote.png" alt="拡張シーケンス図の凡例"><br>
+<img src="./eclipseDebug.exsqd.jpg" alt="拡張シーケンス図" class="objcall"><br>
+<a href="#" onClick="window.close();">閉じる</a>
+</body>
+</html>

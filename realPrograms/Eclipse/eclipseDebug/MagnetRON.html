@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Eclipseのデバッグ機能のマグネトロンによる表現</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+        function init(param) {
+            var title = "Eclipseのデバッグ機能";
+            var subject = "ブレークポイントイベントの検出";
+            if (param) {
+                var t = getParam('title', param);
+                if (t) title = t;
+                var s = getParam('subject', param);
+                if (s) subject = s;
+            }
+            document.title = title + "(" + subject + ")" + "のマグネトロンによる表現";
+            document.getElementById("title2").innerText = title + "(" + subject + ")" + "のマグネトロンによる表現";
+            var desc= document.getElementById("description");
+            desc.innerText = title + "の" + subject + "に関係するプログラムの動作を，" + desc.innerText;
+        }
+
+        function getParam(name, url) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+</head>
+<body onLoad="init(location.search)">
+<h1 id="title2">Eclipseのデバッグ機能のマグネトロンによる表現</h1>
+
+<p id="description">マグネトロンで可視化したものを再生ツール(マグネトロンビューア)で見ていただきます．<br>
+    アニメーションは何度再生していただいても構いません．必ずソースコードと照らし合わせながら見るようにしてください．時間の目安は15分程度です．
+</p>
+<p>
+    マグネトロンビューアはリモートデスクトップ上にインストールしております．<br>
+    マグネトロンビューアの使用方法は<a href="../../../tool/Explanation.html" target="_blank">こちらを</a>，リモートデスクトップへのログイン方法は<a href="../../../ec2/ConnectToEC2.html" target="_blank">こちら</a>をご覧ください．<br>
+    マグネトロンビューアでこの課題を見るための情報は以下の通りです．<br>
+    <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+        開くファイル: C:\Users\userXX\Desktop\traces\Eclipse.magnet<br>
+        抽出する機能: <font color="red">Eclipseデバッグ機能</font>
+    </div>
+</p>
+
+マグネトロンの詳細は<a href="../../../visualization/MagnetRON.html" target="_blank">こちら</a>をご覧ください．<br>
+<img src="../../../visualization/pictures/MagnetRONNote.png" alt="マグネトロンの凡例"><br>
+
+<a href="#" onClick="window.close();">閉じる</a>
+</body>
+</html>
