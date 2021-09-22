@@ -45,6 +45,10 @@
 <body onLoad="setLineNum()">
 <h1>課題A3</h1>
 
+<hr size="5">
+
+<h2>課題の概要</h2>
+
 <p>
     課題A3では，Eclipseのデバッグ機能について見ていきます．
     Eclipseでは，デバッグ実行時にブレークポイントを配置した行に来たとき，プログラムが一時停止します．<br>
@@ -122,17 +126,35 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 </pre>
 </div>
 
+<hr size="5">
+
+<h2>プログラム理解</h2>
+
 <p>
-    下記のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
-    まず，このソースコードを最初から最後まで飛ばさずに追いかけて，ソースコードの全体の流れを把握してください．
+    以下では，プログラムの理解に要した時間を測っていただきますので，お手元に時計をご用意ください．<br>
+    時間計測にあたって，急いで操作していただく必要はまったくありません．<br>
+    最初の課題から最後の課題まで一定のペースを保てるよう, プログラムの動作を追いかけながら<font color="red">全体像を理解すること</font>を意識してください．<br>
+    この課題で理解する内容は，
+    <blockquote>
+        <strong>「プログラムがブレークポイントを配置した行に到達したとき，そのイベントがどのようにして検出され，どのようにして処理されるか?」</strong>
+    </blockquote>
+    です．<br>
+    下記のリンク先は，時間計測の準備ができるまでクリックしないで下さい．<br>
+    1つ目のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．<br>
+    また2つ目のリンク先には，このプログラムの動作をオブジェクト呼び出し図を用いて表現した図が提示されています．<br>
+    リンク先のソースコードを，オブジェクト呼び出し図と<font color="red">照らし合わせながら</font>最初から最後まで飛ばさずに追いかけて，全体の流れを把握してください．時間計測後，プログラムの内容とオブジェクト呼び出し図に関する設問にお答えいただきます．<br>
+    それではリンク先を開いて作業の準備ができ次第，<font color="red">時間計測を開始</font>してください. 時間計測はできる限り，1分以内の単位での計測をお願いします. <br>
 </p>
 
 <blockquote>
     <p><a href="../debugger-like/debugger.html?key=5" target="_blank">Eclipseのデバッグ機能で実行されるソースコード（一部）</a></p>
 </blockquote>
+<blockquote>
+    <a href="../realPrograms/Eclipse/eclipseDebug/ObjCallDiagram.html?title=課題A3&subject=ブレークポイントイベント(BreakpointEventImplオブジェクト)の検出" target="_blank">課題A3のオブジェクト呼び出し図による表現</a>
+</blockquote>
 
 <p>
-    このソースコードについて以下のアンケートにお答えください．
+    プログラム理解の作業について以下のアンケートにお答えください．
 </p>
 
 <blockquote>
@@ -141,30 +163,12 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 
 <hr size="5">
 
-<h1>課題A3の可視化</h1>
+<h2>プログラムと可視化に関する設問</h2>
 
 <p>
-    課題A3について，オブジェクト呼び出し図による表現とマグネトロンによる可視化を見比べて頂きます．<br>
-</p>
-
-<p>
-    まずは，以下の<strong>オブジェクト呼び出し図</strong>(内容についてはリンク先で説明)による表現をご覧ください．
-</p>
-
-<blockquote>
-    <a href="../realPrograms/Eclipse/eclipseDebug/ObjCallDiagram.html?title=課題A3&subject=ブレークポイントイベント(BreakpointEventImplオブジェクト)の検出" target="_blank">課題A3のオブジェクト呼び出し図による表現</a>
-</blockquote>
-
-<p>
-    次に以下の<strong>マグネトロン</strong>(内容についてはリンク先で説明)による可視化をご覧ください．
-</p>
-
-<blockquote>
-    <a href="../realPrograms/Eclipse/eclipseDebug/MagnetRON.html?title=課題A3&subject=ブレークポイントイベント(BreakpointEventImplオブジェクト)の検出" target="_blank">課題A3のマグネトロンによる可視化</a>
-</blockquote>
-
-<p>
-    これらの表現とソースコードの内容を見比べながら，以下のアンケートにお答えください．
+    課題A3のプログラムと可視化について，以下のリンク先の複数の設問にお答えいただきます．その際にも時間計測をお願いいたします．<br>
+    解答の際には，ソースコードとオブジェクト呼び出し図を何度ご覧いただいてもかまいません．時間が掛かってもかまいませんので，できる限り正確な解答をお願いいたします．<br>
+    以下のリンク先をクリックしてから，すべての設問の解答を終えるまでの時間を計測してください．こちらもできる限り，1分以内の単位での計測をお願いします. <br>
 </p>
 
 <blockquote>

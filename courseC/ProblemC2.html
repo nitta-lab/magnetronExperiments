@@ -14,108 +14,119 @@
     <script type="text/javascript">
         SyntaxHighlighter.all();
     </script>
-
     <script type="text/javascript">
         function setLineNum() {
-            var id="SelectionTool";
+            // FigModifyingModeImpl
+            var id = "FigModifyingModeImpl";
             var lineNumPair = [
-                [1, 11],
-                [3, 54],
-                [5, 58],
-                [7, 70],
-                [9, 225],
-                [12, 228],
-                [14, 230],
-                [17, 233],
-                [20, 237],
-                [24, 252],
-                [26,269],
-                [29,274],
-                [32,277],
-                [36,285],
-                [39,288],
-                [46, 377]];
+                [1, 29],
+                [3, 53],
+                [5, 61],
+                [7, 179]
+            ];
             changeLineNum(lineNumPair, id);
-            id="DefaultDrawingView";
+
+            // ModeSelect
+            id = "ModeSelect";
             lineNumPair = [
-                [1, 11],
-                [3, 46],
-                [7, 60],
-                [9, 774],
-                [11, 780],
-                [13,802],
-                [16,1602]];
+                [1, 27],
+                [3, 70],
+                [5, 74],
+                [7, 116],
+                [9, 151],
+                [11, 156],
+                [13, 160],
+                [19, 183],
+                [22, 186],
+                [27, 198],
+                [29, 362]
+            ];
+            changeLineNum(lineNumPair, id);
+
+            // SelectionManager
+            id = "SelectionManager";
+            lineNumPair = [
+                [1, 28],
+                [3, 77],
+                [6, 85],
+                [8, 128],
+                [14, 174],
+                [16, 180],
+                [18, 183],
+                [20, 1128],
+                [26, 1146],
+                [28, 1293]
+            ];
             changeLineNum(lineNumPair, id);
         }
     </script>
 </head>
-
 <body onLoad="setLineNum()">
 <h1>課題C2</h1>
 
+<hr size="5">
+
+<h2>課題の概要</h2>
+
 <p>
-課題C2では，JHotDrawの図形選択機能について見ていきます．
-JHotDrawでは，図面上に配置された図形をクリックして選択することができます．<br>
+課題C2では，ArgoUMLの選択機能について見ていきます．
+ArgoUMLでは，クラス図上に配置したクラスをクリックして選択することができます．<br>
 この課題では，
 
 <blockquote>
-    <strong>「配置された図形がJHotDrawのシステム内部でどのように管理され，図形選択機能の実行によってどのように取り出されて，どのように選択図形として登録されるか?」</strong>
+    <strong>「配置された図形がArgoUMLのシステム内部でどのように管理され，選択機能の実行によってどのように取り出されて，どのように選択図形として登録されるか?」</strong>
 </blockquote>
 
 を理解することを目的とします．<br>
-まず，図形選択機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
-選択モード時に図形をクリックすると，<code>SelectionTool</code> クラスの <code>mousePressed()</code> メソッド(以下，<code>SelectionTool#mousePressed()</code> のように書く)が呼び出されます．
-その中で，270行目から <code>view.findFigure(anchor)</code> が呼び出され，クリックでヒットした図形が戻り値として返されます．
-今回の実行では，ローカル変数 <code>figure</code> に実際に代入されるのは，<code>RectangleFigure</code> クラスのインスタンスへの参照です．
-ここで，<code>RectangleFigure</code> クラスは矩形図形を表すJHotDrawのクラスで，図形を表す <code>Figure</code> の子孫クラスにあたります．
-その後，291行目から <code>tracker.mousePressed(evt)</code> が呼び出され，クリックでヒットした図形が選択状態になります．
+まず，選択機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
+選択モードで図面上をクリックすると，<code>ModeSelect</code> クラスの <code>mousePressed()</code> メソッド(以下，<code>ModeSelect#mousePressed()</code> のように書く)が呼び出されます．
+その中で，160行目から <code>editor.hit(selectAnchor)</code> が呼び出され，クリックでヒットした図形が戻り値として返されます．
+今回の実行で，ローカル変数 <code>underMouse</code> に実際に代入されるのは，<code>FigClass</code> クラスのインスタンスへの参照です．
+ここで，<code>Fig</code> は図形を表すArgoUML(正確にはArgoUML内部で用いられているGEFフレームワーク)のクラスで，
+<code>FigClass</code> は <code>Fig</code> の子孫クラスにあたります．
+その後，187行目から <code>sm.select(underMouse)</code> が呼び出され，<code>underMouse</code>で参照されている図形が選択状態になります．
 </p>
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
-<pre class="brush:java;" id="SelectionTool">
-package org.jhotdraw.draw.tool;
+<pre class="brush:java;" id="FigModifyingModeImpl">
+package org.tigris.gef.base;
 :
-public class SelectionTool extends AbstractTool {
+public class FigModifyingModeImpl extends ModeImpl implements FigModifyingMode {
     :
-    private Tool tracker;
+    protected Editor editor;
     :
-    private DragTracker dragTracker;
+}
+</pre>
+</div>
+
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<pre class="brush:java;" id="ModeSelect">
+package org.tigris.gef.base;
+:
+public class ModeSelect extends FigModifyingModeImpl {
     :
-    public void mousePressed(MouseEvent evt) {
-        if (...) { // (課題から外れるため一部省略)
-            :
-            DrawingView view = getView();
-            :
-            Tool newTracker = null;
+    private Point selectAnchor = ...; // (課題から外れるため一部省略)
+    :
+    public void mousePressed(MouseEvent me) {
+        :
+        selectAnchor = ...; // (課題から外れるため一部省略)
+        :
+        SelectionManager sm = editor.getSelectionManager();
+        :
+        Fig underMouse = editor.hit(selectAnchor);
+        Rectangle smallHitRect = ...; // (課題から外れるため一部省略)
+        if (underMouse instanceof FigGroup) {
+            underMouse = ((FigGroup) underMouse).deepSelect(smallHitRect);
+        }
+        :
+        if (underMouse != null) {
             if (...) { // (課題から外れるため一部省略)
                 :
-            } else {
-                Figure figure;
-                :
-                if (...
-                        ...
-                        ...) { // (課題から外れるため一部省略)
-                    :
-                } else {
-                    :
-                    if (figure == null) {
-                        figure = view.findFigure(anchor);
-                        ..
-                    }
-                }
-                :
-                if (...) { // (課題から外れるため一部省略)
-                    newTracker = getDragTracker(figure);
-                } else {
-                    :
-                }
+            } else if (...) { // (課題から外れるため一部省略)
+                sm.select(underMouse);
             }
-            :
-            if (newTracker != null) {
-                setTracker(newTracker);
-            }
-            tracker.mousePressed(evt);
         }
+        :
     }
     :
 }
@@ -123,82 +134,94 @@ public class SelectionTool extends AbstractTool {
 </div>
 
 <p>
-<code>tracker.mousePressed(evt)</code> の呼び出し先では，最終的に <code>DefaultDrawingView#addToSelection()</code> が呼び出され，
-引数 <code>figure</code> で参照されている <code>RectangleFigure</code> クラスのインスタンスが選択状態になります．
-具体的には <code>DefaultDrawingView</code> クラスの780行目で，フィールド <code>selectedFigures</code> で参照されている <code>LinkedHashSet</code> クラスのインスタンスに
-仮引数として渡された <code>RectangleFigure</code> クラスのインスタンスが新たに追加されることによって，選択図形として登録されます．
+<code>sm.select(underMouse)</code> の呼び出し先では，最終的に <code>SelectionManager#addFig()</code> が呼び出され，
+引数 <code>f</code> で参照されている <code>FigClass</code> クラスのインスタンスが選択状態になります．
+具体的には <code>SelectionManager</code> クラスの130行目で，フィールド <code>selections</code> で参照されている <code>ArrayList</code> クラスのインスタンスに
+<code>SelectionManager#makeSelectionFor()</code> の戻り値である <code>SelectionClass</code> クラスのインスタンスが新たに追加されることによって，選択図形として登録されます．
 </p>
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
-<pre class="brush:java;" id="DefaultDrawingView">
-package org.jhotdraw.draw;
+<pre class="brush:java;" id="SelectionManager">
+package org.tigris.gef.base;
 :
-public class DefaultDrawingView
-        extends JComponent
-        implements DrawingView, EditableComponent {
+public class SelectionManager implements Serializable, KeyListener,
+        MouseListener, MouseMotionListener {
     :
-    private Set&lt;Figure&gt; selectedFigures = new LinkedHashSet&lt;Figure&gt;();
+    private List&lt;Selection&gt; selections = new ArrayList&lt;Selection&gt;();
     :
-    public void addToSelection(Figure figure) {
-        :
-        if (selectedFigures.add(figure)) {
-            :
+    protected void addFig(Fig f) {
+        if (...) { // (課題から外れるため一部省略)
+            selections.add(makeSelectionFor(f));
         }
+    }
+    :
+    public void select(Fig f) {
+        :
+        addFig(f);
+        :
+    }
+    :
+    public static Selection makeSelectionFor(Fig f) {
+        Selection customSelection = f.makeSelection();
+        if (customSelection != null) {
+            return customSelection;
+        }
+        :
     }
     :
 }
 </pre>
 </div>
 
+<hr size="5">
+
+<h2>プログラム理解</h2>
+
 <p>
-下記のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
-まず，このソースコードを最初から最後まで飛ばさずに追いかけて，ソースコードの全体の流れを把握してください．
+    以下では，プログラムの理解に要した時間を測っていただきますので，お手元に時計をご用意ください．<br>
+    時間計測にあたって，急いで操作していただく必要はまったくありません．<br>
+    最初の課題から最後の課題まで一定のペースを保てるよう, プログラムの動作を追いかけながら<font color="red">全体像を理解すること</font>を意識してください．<br>
+    この課題で理解する内容は，
+    <blockquote>
+        <strong>「配置された図形がArgoUMLのシステム内部でどのように管理され，選択機能の実行によってどのように取り出されて，どのように選択図形として登録されるか?」</strong>
+    </blockquote>
+    です．<br>
+    下記のリンク先は，時間計測の準備ができるまでクリックしないで下さい．<br>
+    1つ目のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．<br>
+    また2つ目のリンク先には，このプログラムの動作を拡張シーケンス図を用いて表現した図が提示されています．<br>
+    リンク先のソースコードを，拡張シーケンス図と<font color="red">照らし合わせながら</font>最初から最後まで飛ばさずに追いかけて，全体の流れを把握してください．時間計測後，プログラムの内容と拡張シーケンス図に関する設問にお答えいただきます．<br>
+    それではリンク先を開いて作業の準備ができ次第，<font color="red">時間計測を開始</font>してください. 時間計測はできる限り，1分以内の単位での計測をお願いします. <br>
 </p>
 
 <blockquote>
-    <p><a href="../debugger-like/debugger.html?key=4" target="_blank">JHotDrawの図形選択機能で実行されるソースコード（一部）</a></p>
+    <p><a href="../debugger-like/debugger.html?key=2" target="_blank">ArgoUMLの選択機能で実行されるソースコード（一部）</a></p>
+</blockquote>
+<blockquote>
+    <a href="../realPrograms/ArgoUML/modeSelect/ExtendedSequenceDiagram.html?title=課題C2&subject=クラス図に配置された図形(FigClassオブジェクト)の選択" target="_blank">課題C2の拡張シーケンス図による表現</a>
 </blockquote>
 
 <p>
-このソースコードについて以下のアンケートにお答えください．
+    プログラム理解の作業について以下のアンケートにお答えください．
 </p>
 
 <blockquote>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSebcdiZzLsuBLcFVqE-cP3AWUESPv2Iw0DalDPh9R7h6N27Yw/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf99xtfmMN0Luh36smxePkQhAPHS97EPP6uELt63dB4pwkioA/viewform?usp=sf_link" target="_blank">アンケート回答</a>
 </blockquote>
 
 <hr size="5">
 
-<h1>課題C2の可視化</h1>
+<h2>プログラムと可視化に関する設問</h2>
 
 <p>
-課題C2について，オブジェクト図に呼び出し木を埋め込んだ表記法による表現とオブジェクトの動きを表すアニメーションによる可視化を見比べて頂きます．<br>
-</p>
-
-<p>
-まずは，以下の<strong>オブジェクト図に呼び出し木を埋め込んだ表記法</strong>(内容についてはリンク先で説明)による表現をご覧ください．
-</p>
-
-<blockquote>
-    <a href="../realPrograms/JHotDraw/selectionTool/ObjCallDiagram.html?title=課題C2&subject=図面に配置された図形(RectangleFigureオブジェクト)の選択" target="_blank">課題C2のオブジェクト図と呼び出し木による表現</a>
-</blockquote>
-
-<p>
-次に以下の<strong>オブジェクトの動きを表すアニメーション</strong>(内容についてはリンク先で説明)による可視化をご覧ください．
+    課題C2のプログラムと可視化について，以下のリンク先の複数の設問にお答えいただきます．その際にも時間計測をお願いいたします．<br>
+    解答の際には，ソースコードと拡張シーケンス図を何度ご覧いただいてもかまいません．時間が掛かってもかまいませんので，できる限り正確な解答をお願いいたします．<br>
+    以下のリンク先をクリックしてから，すべての設問の解答を終えるまでの時間を計測してください．こちらもできる限り，1分以内の単位での計測をお願いします. <br>
 </p>
 
 <blockquote>
-    <a href="../realPrograms/JHotDraw/selectionTool/MagnetRON.html?title=課題C2&subject=図面に配置された図形(RectangleFigureオブジェクト)の選択" target="_blank">課題C2のアニメーションによる可視化</a>
-</blockquote>
-
-<p>
-これらの表現とソースコードの内容を見比べながら，以下のアンケートにお答えください．
-</p>
-
-<blockquote>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4m52P3fNOwNDummO0BXKt_A84tS-76KI8uC-2GGuZVUipMA/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdu9h9b39zWF7gWnb4Tk_Nc49SbwIs7AMzhO9FvYTcxp5ML-A/viewform?usp=sf_link" target="_blank">アンケート回答</a>
 </blockquote>
 
 <p style="margin-bottom:2em;"></p>
-<a href="DescriptionArgoUML.html">次へ</a>
+<a href="DescriptionEclipse.html">次へ</a>
 </body>
