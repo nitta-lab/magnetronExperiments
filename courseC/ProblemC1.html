@@ -17,25 +17,8 @@
 
     <script type="text/javascript">
         function setLineNum() {
-            var id="DefaultDragTracker";
-            var lineNumPair = [
-                [1, 11],
-                [3, 46],
-                [5, 80],
-                [7, 96],
-                [9, 98],
-                [11, 112],
-                [13,115],
-                [18,124],
-                [21, 131],
-                [24, 135],
-                [26, 137],
-                [28, 153],
-                [30, 157],
-                [32, 159],
-                [34, 161],
-                [36, 165],
-                [39, 220]];
+            var id="ActionRemoveFromDiagram";
+            var lineNumPair = [[1, 39], [3, 60], [5, 82], [8, 85], [15, 92]];
             changeLineNum(lineNumPair, id);
         }
     </script>
@@ -44,116 +27,98 @@
 <body onLoad="setLineNum()">
 <h1>課題C1</h1>
 
+<hr size="5">
+
+<h2>課題の概要</h2>
+
 <p>
-課題C1では，JHotDrawの図形移動機能について見ていきます．
-JHotDrawでは，選択状態にある図形をドラッグして移動することができます．<br>
+課題C1では，ArgoUMLの削除機能について見ていきます．
+ArgoUMLでは，選択状態にある図形をDelキーを押して削除することができます．<br>
 この課題では，
 
 <blockquote>
-    <strong>「選択された図形がJHotDrawのシステム内部でどのように管理され，図形移動機能の実行によってどのように取り出されて，移動していくか?」</strong>
+    <strong>「選択された図形がArgoUMLのシステム内部でどのように管理され，削除機能の実行によってどのように取り出されて，削除されるか?」</strong>
 </blockquote>
 
 を理解することを目的とします．<br>
-まず，図形移動機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
-図形が選択されている状態でマウスボタンを押すと，<code>DefaultDragTracker</code> クラスの <code>mousePressed()</code> メソッド(以下，<code>DefaultDragTracker#mousePressed()</code> のように書く)が呼び出され，
-その中で，116行目から <code>view.getSelectedFigures()</code> が呼び出されて，選択状態にある図形の集合が戻り値として返されます．
-今回の実行で，ローカル変数 <code>f</code> に実際に代入されるのは，<code>RectangleFigure</code> クラスのインスタンスへの参照です．
-ここで，<code>Figure</code> は図形を表すJHotDrawのクラスで，<code>RectangleFigure</code> は <code>Figure</code> の子孫クラスにあたります．
-その後，マウスボタンを押したままドラッグすると，マウスカーソルが移動するたびに<code>DefaultDragTracker#mouseDragged()</code>が繰り返し呼び出され，その中で，159行目から <code>f.transform(tx)</code> が呼び出されて，
-ローカル変数 <code>f</code> で参照されている選択図形が移動していきます．
+まず，削除機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
+図形が選択されている状態でDelキーを押すと，<code>ActionRemoveFromDiagram</code> クラスの <code>actionPerformed()</code> メソッド(以下，<code>ActionRemoveFromDiagram#actionPerformed()</code> のように書く)が呼び出されます(以下の図を参照)．
+その中の89行目で <code>f.removeFromDiagram()</code> が実行され，ローカル変数 <code>f</code> で参照されている選択図形が削除されます．
+ここで，<code>Fig</code> は図形を表すArgoUML(正確にはArgoUML内部で用いられているGEFフレームワーク)のクラスで，
+<code>f</code> からは <code>Fig</code> クラスの子孫クラスである <code>FigClass</code> クラスのインスタンスが参照されています．
 </p>
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
-<pre class="brush:java;" id="DefaultDragTracker">
-package org.jhotdraw.draw.tool;
+<pre class="brush:java;" id="ActionRemoveFromDiagram">
+package org.argouml.uml.diagram.ui;
 :
-public class DefaultDragTracker extends AbstractTool implements DragTracker {
+public class ActionRemoveFromDiagram extends AbstractAction {
     :
-    private HashSet&lt;Figure&gt; transformedFigures;
-    :
-    public void mousePressed(MouseEvent evt) {
+    public void actionPerformed(ActionEvent ae) {
+        Editor ce = Globals.curEditor();
         :
-        DrawingView view = getView();
-        :
-        if (...) { // (課題から外れるため一部省略)
-            :
-            transformedFigures = new HashSet&lt;Figure&gt;();
-            for (Figure f : view.getSelectedFigures()) {
-                if (...) { // (課題から外れるため一部省略)
-                    transformedFigures.add(f);
-                    ..
+        List&lt;Fig&gt; figs = ce.getSelectionManager().getFigs();
+        for (Fig f : figs) {
+            if (...) { // (課題から外れるため一部省略)
+                if (f instanceof GraphElement) {
+                    f.removeFromDiagram();
+                } else {
+                    :
                 }
             }
-            ..
         }
     }
-    :
-    public void mouseDragged(MouseEvent evt) {
-        :
-        if (...) { // (課題から外れるため一部省略)
-            :
-            AffineTransform tx = ...; // (課題から外れるため一部省略)
-            :
-            for (Figure f : transformedFigures) {
-                :
-                f.transform(tx);
-                :
-            }
-            :
-        }
-    }
-    :
 }
 </pre>
 </div>
 
+<hr size="5">
+
+<h2>プログラム理解</h2>
+
 <p>
-下記のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
-まず，このソースコードを最初から最後まで飛ばさずに追いかけて，ソースコードの全体の流れを把握してください．
+    以下では，プログラムの理解に要した時間を測っていただきますので，お手元に時計をご用意ください．<br>
+    時間計測にあたって，急いで操作していただく必要はまったくありません．<br>
+    最初の課題から最後の課題まで一定のペースを保てるよう, プログラムの動作を追いかけながら<font color="red">全体像を理解すること</font>を意識してください．<br>
+    この課題で理解する内容は，
+    <blockquote>
+        <strong>「選択された図形がArgoUMLのシステム内部でどのように管理され，削除機能の実行によってどのように取り出されて，削除されるか?」</strong>
+    </blockquote>
+    です．<br>
+    下記のリンク先は，時間計測の準備ができるまでクリックしないで下さい．<br>
+    1つ目のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．<br>
+    また2つ目のリンク先には，このプログラムの動作をオブジェクト呼び出し図を用いて表現した図が提示されています．<br>
+    リンク先のソースコードを，オブジェクト呼び出し図と<font color="red">照らし合わせながら</font>最初から最後まで飛ばさずに追いかけて，全体の流れを把握してください．時間計測後，プログラムの内容とオブジェクト呼び出し図に関する設問にお答えいただきます．<br>
+    それではリンク先を開いて作業の準備ができ次第，<font color="red">時間計測を開始</font>してください. 時間計測はできる限り，1分以内の単位での計測をお願いします. <br>
 </p>
 
 <blockquote>
-    <p><a href="../debugger-like/debugger.html?key=3" target="_blank">JHotDrawの図形移動機能で実行されるソースコード（一部）</a></p>
+    <p><a href="../debugger-like/debugger.html?key=1" target="_blank">ArgoUMLの削除機能で実行されるソースコード（一部）</a></p>
+</blockquote>
+<blockquote>
+    <a href="../realPrograms/ArgoUML/actionRemoveFromDiagram/ObjCallDiagram.html?title=課題C1&subject=選択された図形(FigClassオブジェクト)の削除" target="_blank">課題C1のオブジェクト呼び出し図による表現</a>
 </blockquote>
 
 <p>
-このソースコードについて以下のアンケートにお答えください．
+    プログラム理解の作業について以下のアンケートにお答えください．
 </p>
 
 <blockquote>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSePahfnyUh5Oj-sAiV7Q3iPveEvGUTttXvNDcIB9cSQDtqO3A/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe40pwl-BMIRrEfwZjEA7TWMD5RplhEWg0BT-nD7pV9EoAw_Q/viewform?usp=sf_link" target="_blank">アンケート回答</a>
 </blockquote>
 
 <hr size="5">
 
-<h1>課題C1の可視化</h1>
+<h2>プログラムと可視化に関する設問</h2>
 
 <p>
-課題C1について，オブジェクト図に呼び出し木を埋め込んだ表記法による表現とオブジェクトの動きを表すアニメーションによる可視化を見比べて頂きます．<br>
-</p>
-
-<p>
-まずは，以下の<strong>オブジェクト図に呼び出し木を埋め込んだ表記法</strong>(内容についてはリンク先で説明)による表現をご覧ください．
-</p>
-
-<blockquote>
-    <a href="../realPrograms/JHotDraw/defaultDragTracker/ObjCallDiagram.html?title=課題C1&subject=選択された図形(RectangleFigureオブジェクト)の移動" target="_blank">課題C1のオブジェクト図と呼び出し木による表現</a>
-</blockquote>
-
-<p>
-次に以下の<strong>オブジェクトの動きを表すアニメーション</strong>(内容についてはリンク先で説明)による可視化をご覧ください．
+    課題C1のプログラムと可視化について，以下のリンク先の複数の設問にお答えいただきます．その際にも時間計測をお願いいたします．<br>
+    解答の際には，ソースコードとオブジェクト呼び出し図を何度ご覧いただいてもかまいません．時間が掛かってもかまいませんので，できる限り正確な解答をお願いいたします．<br>
+    以下のリンク先をクリックしてから，すべての設問の解答を終えるまでの時間を計測してください．こちらもできる限り，1分以内の単位での計測をお願いします. <br>
 </p>
 
 <blockquote>
-    <p><a href="../realPrograms/JHotDraw/defaultDragTracker/MagnetRON.html?title=課題C1&subject=選択された図形(RectangleFigureオブジェクト)の移動" target="_blank">課題C1のアニメーションによる可視化</a></p>
-</blockquote>
-
-<p>
-これらの表現とソースコードの内容を見比べながら，以下のアンケートにお答えください．
-</p>
-
-<blockquote>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqCv5mYE1Oq1yHHr0gz2UjiMx_cokTUXoyQkQC-ZklDt-wrw/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScydilpmQcW6qX5f_8NDxmbPJKAYs8cvx_n53RAHifam2F6ZA/viewform?usp=sf_link" target="_blank">アンケート回答</a>
 </blockquote>
 
 <p style="margin-bottom:2em;"></p>

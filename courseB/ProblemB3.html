@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 <head>
-<title>課題B3</title>
+    <title>課題B3</title>
     <meta charset="UTF-8">
     <!--    <link rel="stylesheet" href="sample.css">-->
     <!-- XRegExp is bundled with the final shCore.js during build -->
@@ -17,25 +17,26 @@
 
     <script type="text/javascript">
         function setLineNum() {
-            var id="DefaultDragTracker";
+            var id="EventDispatcher";
             var lineNumPair = [
                 [1, 11],
-                [3, 46],
-                [5, 80],
-                [7, 96],
-                [9, 98],
-                [11, 112],
-                [13,115],
-                [18,124],
-                [21, 131],
-                [24, 135],
-                [26, 137],
-                [28, 153],
-                [30, 157],
-                [32, 159],
-                [34, 161],
-                [36, 165],
-                [39, 220]];
+                [3, 63],
+                [5, 67],
+                [7, 232],
+                [14,241],
+                [16,246],
+                [24,269],
+                [26,271],
+                [29,276],
+                [33,364]];
+            changeLineNum(lineNumPair, id);
+            id="JavaBreakpoint";
+            lineNumPair = [
+                [1, 11],
+                [3, 62],
+                [5, 349],
+                [7, 351],
+                [10, 1295]];
             changeLineNum(lineNumPair, id);
         }
     </script>
@@ -44,118 +45,136 @@
 <body onLoad="setLineNum()">
 <h1>課題B3</h1>
 
+<hr size="5">
+
+<h2>課題の概要</h2>
+
 <p>
-課題B3では，JHotDrawの図形移動機能について見ていきます．
-JHotDrawでは，選択状態にある図形をドラッグして移動することができます．<br>
-この課題では，
+    課題B3では，Eclipseのデバッグ機能について見ていきます．
+    Eclipseでは，デバッグ実行時にブレークポイントを配置した行に来たとき，プログラムが一時停止します．<br>
+    この課題では，
 
 <blockquote>
-    <strong>「選択された図形がJHotDrawのシステム内部でどのように管理され，図形移動機能の実行によってどのように取り出されて，移動していくか?」</strong>
+    <strong>「プログラムがブレークポイントを配置した行に到達したとき，そのイベントがどのようにして検出され，どのようにして処理されるか?」</strong>
 </blockquote>
 
 を理解することを目的とします．<br>
-まず，図形移動機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
-図形が選択されている状態でマウスボタンを押すと，<code>DefaultDragTracker</code> クラスの <code>mousePressed()</code> メソッド(以下，<code>DefaultDragTracker#mousePressed()</code> のように書く)が呼び出され，
-その中で，116行目から <code>view.getSelectedFigures()</code> が呼び出されて，選択状態にある図形の集合が戻り値として返されます．
-今回の実行で，ローカル変数 <code>f</code> に実際に代入されるのは，<code>RectangleFigure</code> クラスのインスタンスへの参照です．
-ここで，<code>Figure</code> は図形を表すJHotDrawのクラスで，<code>RectangleFigure</code> は <code>Figure</code> の子孫クラスにあたります．
-その後，マウスボタンを押したままドラッグすると，マウスカーソルが移動するたびに<code>DefaultDragTracker#mouseDragged()</code>が繰り返し呼び出され，その中で，159行目から <code>f.transform(tx)</code> が呼び出されて，
-ローカル変数 <code>f</code> で参照されている選択図形が移動していきます．
+まず，デバッグ機能で実行されるソースコードの中から一部を抜き出したものについて見ていきましょう．
+デバッグ実行を開始すると，<code>EventDispatcher</code> クラスの <code>run()</code> メソッド(以下，<code>EventDispatcher#run()</code> のように書く)が呼び出されます．
+その後，241行目から <code>q.remove(1000)</code> が呼び出され，実行がブレークポイントに到達すると，ブレークポイントに到達したことを示すイベントが返されます．
+今回の実行では，ローカル変数 <code>eventSet</code> に実際に代入されるのは，<code>EventSetImpl</code> クラスのインスタンスへの参照です．
+ここで，<code>EventSetImpl</code> クラスはデバッグ実行時に発生したイベントの集合を保持するためのクラスで，今回の場合はブレークポイントに到達したことを示すイベント(<code>BreakpointEventImpl</code>)のみが保持されています．
+その後，271行目から <code>job.schedule()</code> が呼び出され，Eclipseのジョブ管理システムを経由して，
+<code>EventDispatcher</code> 内の無名クラス <code>EventDispatcher$1</code> (248～269行目)の <code>run()</code> メソッド(249行目)が呼び出されます．
 </p>
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
-<pre class="brush:java;" id="DefaultDragTracker">
-package org.jhotdraw.draw.tool;
+<pre class="brush:java;" id="EventDispatcher">
+package org.eclipse.jdt.internal.debug.core;
 :
-public class DefaultDragTracker extends AbstractTool implements DragTracker {
+public class EventDispatcher implements Runnable {
     :
-    private HashSet&lt;Figure&gt; transformedFigures;
-    :
-    public void mousePressed(MouseEvent evt) {
-        :
-        DrawingView view = getView();
-        :
-        if (...) { // (課題から外れるため一部省略)
-            :
-            transformedFigures = new HashSet&lt;Figure&gt;();
-            for (Figure f : view.getSelectedFigures()) {
-                if (...) { // (課題から外れるため一部省略)
-                    transformedFigures.add(f);
-                    ..
+    private JDIDebugTarget fTarget;
+	:
+	public void run() {
+		VirtualMachine vm = fTarget.getVM();
+		if (vm != null) {
+			EventQueue q= vm.eventQueue();
+			EventSet eventSet= null;
+			while (...) {
+                :
+                eventSet= q.remove(1000);
+                :
+                if(... &amp;&amp; eventSet != null) {
+                    final EventSet set = eventSet;
+                    Job job = new Job("JDI Event Dispatch") { //$NON-NLS-1$
+                        protected IStatus run(IProgressMonitor monitor) {
+                            dispatch(set);
+                            return ...;
+                        }
+                    :
+                    };
+                    :
+                    job.schedule(); // (job.schedule()の先の呼び出しの一部は課題から外れるため省略)
                 }
-            }
-            ..
-        }
-    }
-    :
-    public void mouseDragged(MouseEvent evt) {
-        :
-        if (...) { // (課題から外れるため一部省略)
-            :
-            AffineTransform tx = ...; // (課題から外れるため一部省略)
-            :
-            for (Figure f : transformedFigures) {
                 :
-                f.transform(tx);
-                :
-            }
-            :
-        }
-    }
+			}
+		}
+	}
     :
 }
 </pre>
 </div>
 
 <p>
-下記のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．
-まず，このソースコードを最初から最後まで飛ばさずに追いかけて，ソースコードの全体の流れを把握してください．
+    250行目の<code>dispatch(set)</code> の呼び出し先では，最終的に以下の <code>JavaBreakpoint#handleBreakpointEvent()</code> が呼び出され，
+    引数 <code>event</code> で <code>BreakpointEventImpl</code> クラスのインスタンスへの参照を受け取り，ブレークポイントに到達したときの処理が実行されます．
+</p>
+
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<pre class="brush:java;" id="JavaBreakpoint">
+package org.eclipse.jdt.internal.debug.core.breakpoints;
+:
+public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoint, IJDIEventListener, IDebugEventSetListener {
+	:
+ 	public boolean handleBreakpointEvent(Event event, JDIThread thread, boolean suspendVote) {
+		:
+        return ...; // Resume if suspend fails (課題から外れるため省略)
+	}
+	:
+}
+</pre>
+</div>
+
+<hr size="5">
+
+<h2>プログラム理解</h2>
+
+<p>
+    以下では，プログラムの理解に要した時間を測っていただきますので，お手元に時計をご用意ください．<br>
+    時間計測にあたって，急いで操作していただく必要はまったくありません．<br>
+    最初の課題から最後の課題まで一定のペースを保てるよう, プログラムの動作を追いかけながら<font color="red">全体像を理解すること</font>を意識してください．<br>
+    この課題で理解する内容は，
+    <blockquote>
+        <strong>「プログラムがブレークポイントを配置した行に到達したとき，そのイベントがどのようにして検出され，どのようにして処理されるか?」</strong>
+    </blockquote>
+    です．<br>
+    下記のリンク先は，時間計測の準備ができるまでクリックしないで下さい．<br>
+    1つ目のリンク先には，この課題に必要な部分を抜き出したソースコードが，実行の流れがわかるようデバッグ実行の形式で提示されています(デバッガ画面の操作方法については<a href="../debugger-like/debuggerHelp.html" target="_blank">こちら</a>)．<br>
+    また2つ目のリンク先には，このプログラムの動作を拡張シーケンス図を用いて表現した図が提示されています．<br>
+    リンク先のソースコードを，拡張シーケンス図と<font color="red">照らし合わせながら</font>最初から最後まで飛ばさずに追いかけて，全体の流れを把握してください．時間計測後，プログラムの内容と拡張シーケンス図に関する設問にお答えいただきます．<br>
+    それではリンク先を開いて作業の準備ができ次第，<font color="red">時間計測を開始</font>してください. 時間計測はできる限り，1分以内の単位での計測をお願いします. <br>
 </p>
 
 <blockquote>
-    <p><a href="../debugger-like/debugger.html?key=3" target="_blank">JHotDrawの図形移動機能で実行されるソースコード（一部）</a></p>
+    <p><a href="../debugger-like/debugger.html?key=5" target="_blank">Eclipseのデバッグ機能で実行されるソースコード（一部）</a></p>
+</blockquote>
+<blockquote>
+    <a href="../realPrograms/Eclipse/eclipseDebug/ExtendedSequenceDiagram.html?title=課題B3&subject=ブレークポイントイベント(BreakpointEventImplオブジェクト)の検出" target="_blank">課題B3の拡張シーケンス図による表現</a>
 </blockquote>
 
 <p>
-このソースコードについて以下のアンケートにお答えください．
+    プログラム理解の作業について以下のアンケートにお答えください．
 </p>
 
 <blockquote>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSePahfnyUh5Oj-sAiV7Q3iPveEvGUTttXvNDcIB9cSQDtqO3A/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSebcdiZzLsuBLcFVqE-cP3AWUESPv2Iw0DalDPh9R7h6N27Yw/viewform?usp=sf_link" target="_blank">アンケート回答</a>
 </blockquote>
 
 <hr size="5">
 
-<h1>課題B3の可視化</h1>
+<h2>プログラムと可視化に関する設問</h2>
 
 <p>
-課題B3について，オブジェクト図に呼び出し木を埋め込んだ表記法による表現とオブジェクトの動きを表すアニメーションによる可視化を見比べて頂きます．<br>
-</p>
-
-<p>
-まずは，以下の<strong>オブジェクトの動きを表すアニメーション</strong>(内容についてはリンク先で説明)による可視化をご覧ください．
-</p>
-
-<blockquote>
-    <p><a href="../realPrograms/JHotDraw/defaultDragTracker/MagnetRON.html?title=課題B3&subject=選択された図形(RectangleFigureオブジェクト)の移動" target="_blank">課題B3のアニメーションによる可視化</a></p>
-</blockquote>
-
-<p>
-次に以下の<strong>オブジェクト図に呼び出し木を埋め込んだ表記法</strong>(内容についてはリンク先で説明)による表現をご覧ください．
+    課題B3のプログラムと可視化について，以下のリンク先の複数の設問にお答えいただきます．その際にも時間計測をお願いいたします．<br>
+    解答の際には，ソースコードと拡張シーケンス図を何度ご覧いただいてもかまいません．時間が掛かってもかまいませんので，できる限り正確な解答をお願いいたします．<br>
+    以下のリンク先をクリックしてから，すべての設問の解答を終えるまでの時間を計測してください．こちらもできる限り，1分以内の単位での計測をお願いします. <br>
 </p>
 
 <blockquote>
-    <a href="../realPrograms/JHotDraw/defaultDragTracker/ObjCallDiagram.html?title=課題B3&subject=選択された図形(RectangleFigureオブジェクト)の移動" target="_blank">課題B3のオブジェクト図と呼び出し木による表現</a>
-</blockquote>
-
-<p>
-これらの表現とソースコードの内容を見比べながら，以下のアンケートにお答えください．
-</p>
-
-<blockquote>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqCv5mYE1Oq1yHHr0gz2UjiMx_cokTUXoyQkQC-ZklDt-wrw/viewform?usp=sf_link" target="_blank">アンケート回答</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4m52P3fNOwNDummO0BXKt_A84tS-76KI8uC-2GGuZVUipMA/viewform?usp=sf_link" target="_blank">アンケート回答</a>
 </blockquote>
 
 <p style="margin-bottom:2em;"></p>
-<a href="ProblemB4.html">次へ</a>
+<a href="DescriptionJHotDraw.html">次へ</a>
 </body>

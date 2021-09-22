@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>小課題4のオブジェクト図と呼び出し木による表現</title>
+    <title>小課題4のオブジェクト呼び出し図による表現</title>
     <meta charset="UTF-8">
     <script type="text/javascript">
         function init(param) {
@@ -10,8 +10,8 @@
                 var t = getParam('title', param);
                 if (t) title = t;
             }
-            document.title = title + "のオブジェクト図と呼び出し木による表現";
-            document.getElementById("title2").innerText = title + "のオブジェクト図と呼び出し木による表現";
+            document.title = title + "のオブジェクト呼び出し図による表現";
+            document.getElementById("title2").innerText = title + "のオブジェクト呼び出し図による表現";
             var desc= document.getElementById("description");
             desc.innerText = title + "の" + desc.innerText;
         }
@@ -27,22 +27,20 @@
     </script>
 </head>
 <body onLoad="init(location.search)">
-<h1 id="title2">小課題4のオブジェクト図と呼び出し木による表現</h1>
+<h1 id="title2">小課題4のオブジェクト呼び出し図による表現</h1>
 
-<p id="description">オブジェクト図に呼び出し木を埋め込んだものです．<br>
-可能な限り，ソースコードと照らし合わせながら見るようにしてください．時間の目安は5分程度です．
+<p id="description">
+    オブジェクト呼び出し図による可視化です．<br>
+    必ずソースコードと照らし合わせながら見るようにしてください．時間の目安は5分程度です．
 </p>
-<p>
-円はオブジェクトを，円の内部の矩形はメソッドの実行，破線の円はスーパークラス内の実装部分を表し，円の上にクラス名を，矩形の内部にメソッド名を記します．<br>
-円の間の太い実線矢印はフィールドによる参照，矩形から円への細い実線矢印は引数やローカル変数による参照，<br>
-破線矢印はオブジェクトの生成を，矩形の間の緑色の破線矢印はメソッド呼び出しを表します．<br>
-また，赤い実線矢印は，その参照がこのプログラムの実行中に生成されたことを示します．<br>
-なお，あるクラスのクラスメソッド(staticメソッド)が呼び出された場合，そのクラス自体は矩形で表されます．<br>
-</p>
+オブジェクト呼び出し図の詳細は<a href="../../visualization/ObjCallDiagram.html" target="_blank">こちら</a>をご覧ください．<br>
 
-<img src="./Exp4ObjCall.jpg" alt="オブジェクト図と呼び出し木">
-<br>
-
+<table>
+    <tr>
+        <td><img src="./Exp4ObjCall.jpg" alt="オブジェクト呼び出し図"></td>
+        <td><img src="../../visualization/pictures/ObjCallNote.png" alt="オブジェクト呼び出し図の凡例"></td>
+    </tr>
+</table>
 <a href="#" onClick="window.close();">閉じる</a>
 </body>
 </html>

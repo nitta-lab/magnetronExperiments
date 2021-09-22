@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Eclipseのデバッグ機能のオブジェクト呼び出し図による表現</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+        function init(param) {
+            var title = "Eclipseのデバッグ機能";
+            var subject = "ブレークポイントイベントの検出";
+            if (param) {
+                var t = getParam('title', param);
+                if (t) title = t;
+                var s = getParam('subject', param);
+                if (s) subject = s;
+            }
+            document.title = title + "(" + subject + ")" + "のオブジェクト呼び出し図による表現";
+            document.getElementById("title2").innerText = title + "(" + subject + ")" + "のオブジェクト呼び出し図による表現";
+            var desc= document.getElementById("description");
+            desc.innerText = title + "の" + subject + "に関係するプログラムの動作の，" + desc.innerText;
+        }
+
+        function getParam(name, url) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+    <style type="text/css">
+        img.objcall { zoom: 0.75; }
+    </style>
+</head>
+<body onLoad="init(location.search)">
+<h1 id="title2">Eclipseのデバッグ機能のオブジェクト呼び出し図による表現</h1>
+
+<p id="description">
+    オブジェクト呼び出し図による可視化です．<br>
+    必ずソースコードと照らし合わせながら見るようにしてください．時間の目安は15分程度です．
+</p>
+オブジェクト呼び出し図の詳細は<a href="../../../visualization/ObjCallDiagram.html" target="_blank">こちら</a>をご覧ください．<br>
+
+<table>
+    <tr>
+        <td><img src="./EclipseDebugObjCall.jpg" alt="オブジェクト呼び出し図" class="objcall"></td>
+        <td><img src="../../../visualization/pictures/ObjCallNote.png" alt="オブジェクト呼び出し図の凡例"></td>
+    </tr>
+</table>
+<a href="#" onClick="window.close();">閉じる</a>
+</body>
+</html>
