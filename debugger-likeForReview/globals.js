@@ -1,5 +1,5 @@
 //var title = ["実験課題1", "ArgoUML 図形削除機能", "ArgoUML 図形選択機能", "JHotDraw 図形移動機能", "JHotDraw 図形選択機能"];
-var title = ["AP6", "ArgoUML (Delete Figure)", "ArgoUML (Select Figure)", "JHotDraw (Transform Figure)", "JHotDraw (Select Figure)"];
+var title = ["AP6", "ArgoUML (Delete Figure)", "ArgoUML (Select Figure)", "JHotDraw (Transform Figure)", "JHotDraw (Select Figure)", "Eclipse (Debug)"];
 var titleToJson = new Map([[title[0], "../artificialPrograms/pre_Exp7/pre_Exp7.json"],
                            [title[1],
                             "../realProgramsForReview/ArgoUML/actionRemoveFromDiagram/actionRemoveFromDiagram.json"],
