@@ -1,5 +1,5 @@
 {
-    "root": [{
+    "root": {
         "html": "SelectionTool.html",
         "signature": "public void mousePressed(MouseEvent)",
         "firstLine": "226",
@@ -195,6 +195,6 @@
                 }]
             }
         }]
-    }]
+    }
 }
 

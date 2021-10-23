@@ -1,5 +1,5 @@
 {
-    "root": [{
+    "root": {
         "html": "DefaultDragTracker.html",
         "signature": "public void mousePressed(MouseEvent)",
         "firstLine": "97",
@@ -42,5 +42,5 @@
                 "children": null
             }
         }]
-    }]
+    }
 }
