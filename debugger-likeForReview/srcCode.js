@@ -17,7 +17,7 @@ function onStartSrcCode() { // call from globals.js
     var eSrcCodeText = parent.srcCodeFrame.document.getElementById("srcCodeText");
 
     setEClassNameInner(parent.curClassName);
-    loadParentsSrcCode(parent.root[rootIndex].parents);
+    loadParentsSrcCode(parent.root[parent.rootIndex].parents);
     loadSrcCode(parent.curHtml);
     eSrcCodeText.addEventListener('load', function () {
         setFlag(); // callStack.js
