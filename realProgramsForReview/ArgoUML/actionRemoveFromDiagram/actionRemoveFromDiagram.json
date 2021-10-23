@@ -1,5 +1,5 @@
 {
-    "root": {
+    "root": [{
         "html": "ActionRemoveFromDiagram.html",
         "signature": "public void actionPerformed(ActionEvent)",
         "firstLine": "83",
@@ -51,5 +51,5 @@
                 }]
             }
         }]
-    }
+    }]
 }

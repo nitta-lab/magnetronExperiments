@@ -24,6 +24,7 @@ var titleToJson = new Map([[title[0], "../artificialPrograms/pre_Exp7/pre_Exp7.j
 //                          ]);
 var key = title[2]; //Change here!
 var root;
+var rootIndex;
 var stack = [{
     "num": "0",
     "line": "0"
@@ -95,12 +96,13 @@ function init_globals() {
         }
     }
 
-    stack[0].line = root.firstLine;
-    curRoot = root;
+    rootIndex = 0;
+    stack[0].line = root[rootIndex].firstLine;
+    curRoot = root[rootIndex];
     setPath(titleToJson.get(key));
 
     // curHtml, curClassName変更
-    setCurHtml(root.html);
+    setCurHtml(root[rootIndex].html);
 }
 
 function setCurHtml(htmlPath) {

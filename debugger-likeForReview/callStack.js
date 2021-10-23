@@ -91,7 +91,7 @@ function stepReturnCallStack() {
     var curRoot = parent.curRoot;
     stepOverCallStack();
     if (curRoot.children) { // childrenがnullでないとき
-        if (curRoot != parent.root) { //curRootがrootでないとき
+        if (curRoot != parent.root[parent.rootIndex]) { //curRootがrootでないとき
             stepOverCallStack();
         }
     }
