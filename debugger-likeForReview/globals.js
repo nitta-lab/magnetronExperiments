@@ -9,6 +9,8 @@ var titleToJson = new Map([[title[0], "../toyPrograms/pre_Exp7/pre_Exp7.json"],
                             "../realProgramsForReview/JHotDraw/defaultDragTracker/defaultDragTracker.json"],
                            [title[4],
                             "../realProgramsForReview/JHotDraw/selectionTool/selectionTool.json"]
+                           [title[5],
+                            "../realProgramsForReview/Eclipse/eclipseDebug/eclipseDebug.json"]
                           ]);
 //var titleToJson = new Map([[title[0], "../toyPrograms/pre_Exp7/pre_Exp7.json"],
 //                           [title[1],
