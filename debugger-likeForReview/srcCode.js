@@ -17,7 +17,7 @@ function onStartSrcCode() { // call from globals.js
     var eSrcCodeText = parent.srcCodeFrame.document.getElementById("srcCodeText");
 
     setEClassNameInner(parent.curClassName);
-    loadParentsSrcCode(parent.root.parents);
+    loadParentsSrcCode(parent.root[rootIndex].parents);
     loadSrcCode(parent.curHtml);
     eSrcCodeText.addEventListener('load', function () {
         setFlag(); // callStack.js
@@ -98,6 +98,8 @@ function loadSrcCode(curHtml, from = null, to = null) {
 function changeHighlighted(from, to) {
     var eSrcCodeText = parent.srcCodeFrame.document.getElementById("srcCodeText");
     var curSrcCodeText;
+
+    // curSrcCodeTextの取得
     var regex = /^(\s*:)|(\s{8,}})$|@Override/g;
     if (!parent.curClassName.includes("$")) {
         curSrcCodeText = eSrcCodeText.contentDocument.querySelector('#' + parent.curClassName);
@@ -164,6 +166,38 @@ function changeHighlighted(from, to) {
     }
 }
 
+function isIncludeSrcCode(line, str) {
+    var eSrcCodeText = parent.srcCodeFrame.document.getElementById("srcCodeText");
+    var curSrcCodeText;
+
+    // curSrcCodeTextの取得
+    var regex = /^(\s*:)|(\s{8,}})$|@Override/g;
+    if (!parent.curClassName.includes("$")) {
+        curSrcCodeText = eSrcCodeText.contentDocument.querySelector('#' + parent.curClassName);
+    } else {
+        tempClassName = (parent.curClassName).split("$");
+        var matchPattern = /^[0-9]+$/;
+        if (matchPattern.test(tempClassName[tempClassName.length - 1])) {
+            curSrcCodeText =
+                eSrcCodeText.contentDocument.getElementById(parent.curClassName);
+        } else {
+            curSrcCodeText =
+                eSrcCodeText.contentDocument.querySelector('#' + tempClassName[tempClassName.length - 1]);
+            regex = /^(\s*:)|(\s{12,}})$|@Override/g;
+        }
+    }
+
+    var td_code = curSrcCodeText.children[0].children[1].children[0].children[0].children[1].children[0].children;
+    var td_gutter = curSrcCodeText.children[0].children[1].children[0].children[0].children[0].children;
+
+    for (var i = 0; i < td_code.length; i++) {
+        if (td_gutter[i].innerHTML == line) {
+            return (td_code[i].innerText).includes(str);
+        }
+    }
+    return false;
+}
+
 function iframeResize(element) {
     //    var clientHeight = parent.srcCodeFrame.document.documentElement.clientHeight;
     //    var clientHeight = element.contentDocument.body.clientHeight;
@@ -196,17 +230,20 @@ function stepIntoSrcCode() {
     }
 
     if (parent.stackIndex.length < stackLen) {
-        if (curLine <= parent.curRoot.lastLine) {
+        if (Number(curLine) <= Number(parent.curRoot.lastLine)) {
             parent.stackIndex.push(0);
         }
     } else {
         // 読むchildrenがないとき
         if (children.length <= parent.stackIndex[stackLen - 1] + 1) {
-            if (curLine >= parent.curRoot.lastLine) {
+            if (Number(curLine) >= Number(parent.curRoot.lastLine)) {
                 return stepOverSrcCode();
             }
         }
         parent.stackIndex[stackLen - 1] += 1;
+        while (parent.stackIndex.length > stackLen) {
+            parent.stackIndex.pop();
+        }
         if (stackLen == 1 && parent.stackIndex.length > 1) {
             while (parent.stackIndex.length > 1) {
                 parent.stackIndex.pop();
@@ -256,7 +293,7 @@ function stepOverSrcCode() {
     var children = parent.curRoot.children;
     var eSrcCodeText = parent.srcCodeFrame.document.getElementById("srcCodeText");
 
-    if (curLine < parent.curRoot.lastLine) { // curLineがlastLineより前にあるとき
+    if (Number(curLine) < Number(parent.curRoot.lastLine)) { // curLineがlastLineより前にあるとき
         changeHighlighted(curLine, Number(curLine) + 1);
         parent.stack[stackLength - 1].line = Number(parent.stack[stackLength - 1].line) + 1;
 
@@ -304,13 +341,22 @@ function stepOverSrcCode() {
 
     } else { // curLineがlastLineより同じか後ろにあるとき
         outputLog(parent.curRoot, curLine, callFromLine, curStackIndex);
-        if (parent.root == parent.curRoot) { // callStackに呼び出しが残っていないとき
-            changeHighlighted(curLine, -1);
-            parent.stack[stackLength - 1].line = Number(parent.stack[stackLength - 1].line) + 1;
-            return onFinishSrcCode();
-
+        if (parent.root[parent.rootIndex] == parent.curRoot) { // callStackに呼び出しが残っていないとき
+            parent.rootIndex += 1;
+            if (parent.root[parent.rootIndex]) {
+                parent.curRoot = parent.root[parent.rootIndex];
+                changeHighlighted(curLine, parent.curRoot.firstLine);
+                parent.stack[stackLength - 1].line = parent.curRoot.firstLine;
+                parent.stackIndex.length = 0; // stackIndexを初期化
+                return;
+            } else {
+                changeHighlighted(curLine, -1);
+                parent.stack[stackLength - 1].line = Number(parent.stack[stackLength - 1].line) + 1;
+                return onFinishSrcCode();
+            }
         } else { // callStackに呼び出しが残っているとき
-            var tempRoot = parent.root;
+            var tempRoot = parent.root[parent.rootIndex];
+            var fReturn = isIncludeSrcCode(Number(parent.stack[stackLength - 1].line), "return");
 
             parent.stack.pop(); //　一つ前のスタックに戻る
             stackLength = parent.stack.length;
@@ -323,6 +369,7 @@ function stepOverSrcCode() {
             }
             parent.curRoot = tempRoot;
             children = parent.curRoot.children;
+
             // curHtml, curClassName変更, globals.js
             parent.setCurHtml(parent.curRoot.html);
             parent.setClassName(parent.curHtml);
@@ -337,9 +384,12 @@ function stepOverSrcCode() {
             } else { // 読むchildrenがないとき
                 if (curLine < parent.curRoot.lastLine) { // curLineがlastLineより前にあるとき
                     // srcCode読み込み
-                    loadSrcCode(parent.curHtml, curLine, Number(curLine) + 1);
-                    parent.stack[stackLength - 1].line = Number(parent.stack[stackLength - 1].line) + 1;
-
+                    if (fReturn) {
+                        loadSrcCode(parent.curHtml, -1, curLine);
+                    } else {
+                        loadSrcCode(parent.curHtml, curLine, Number(curLine) + 1);
+                        parent.stack[stackLength - 1].line = Number(parent.stack[stackLength - 1].line) + 1;
+                    }
                     outputLog(parent.curRoot, curLine, callFromLine, curStackIndex);
                     return;
                 } else {
