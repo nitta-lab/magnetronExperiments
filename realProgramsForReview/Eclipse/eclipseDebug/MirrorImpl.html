@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- XRegExp is bundled with the final shCore.js during build -->
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../../syntaxhighlighter-3.0.83/scripts/shBrushJava.js"></script>
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shCoreEclipse.css" type="text/css" />
+    <link rel="stylesheet" href="../../../syntaxhighlighter-3.0.83/styles/shThemeEclipse.css" type="text/css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" src="../../../debugger-like/lineNum.js"></script>
+</head>
+
+<body onLoad="setLineNum()">
+<pre class="brush:java;" id="MirrorImpl">
+package org.eclipse.jdi.internal;
+:
+public class MirrorImpl implements Mirror {
+    :
+    private VirtualMachineImpl fVirtualMachineImpl;
+    :
+    public VirtualMachineImpl virtualMachineImpl() {
+		return fVirtualMachineImpl;
+	}
+    :
+	public final JdwpCommandPacket getCommandVM(int command, long timeout) throws InterruptedException {
+		return fVirtualMachineImpl.packetReceiveManager().getCommand(command, timeout);
+	}
+    :
+}
+</pre>
+<script type="text/javascript">
+    function setLineNum() {
+        var id="MirrorImpl";
+        var lineNumPair = [
+            [1, 11],
+            [3, 44],
+            [5, 49],
+            [7, 94],
+            [11, 276],
+            [15, 647]];
+        changeLineNum(lineNumPair, id);
+    }
+</script>
+
+</body></html>
